@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "PainCare_Frontend_Angular:build:production"
+              "buildTarget": "PainCare_Frontend_Angular:build:production"
             },
             "development": {
-              "browserTarget": "PainCare_Frontend_Angular:build:development"
+              "buildTarget": "PainCare_Frontend_Angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "PainCare_Frontend_Angular:build"
+            "buildTarget": "PainCare_Frontend_Angular:build"
           }
         },
         "test": {
