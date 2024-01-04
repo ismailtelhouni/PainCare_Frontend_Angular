@@ -1,0 +1,65 @@
+<!-- <div class="container">
+    <h2>Questionnaire</h2>
+  
+    <div class="progress">
+      <div class="progress-bar" [style.width]="progress + '%'"></div>
+    </div>
+
+    <div class="question">
+      <label>Question 1: How would you rate your pain level?</label>
+      <input type="range" min="0" max="10" [(ngModel)]="painLevel" />
+      <p>Pain Level: {{ painLevel }}</p>
+    </div>
+  
+<div class="question">
+    <label>Question 2: Choose your answer:</label>
+    <div *ngFor="let choice of question2Choices">
+      <input type="checkbox" [(ngModel)]="selectedChoices.question2[choice]" [value]="choice" />
+      {{ choice }}
+    </div>
+  </div>
+  
+  <div class="question">
+    <label>Question 3: Choose your answer:</label>
+    <div *ngFor="let choice of question3Choices">
+      <input type="checkbox" [(ngModel)]="selectedChoices.question3[choice]" [value]="choice" />
+      {{ choice }}
+    </div>
+  </div>
+  
+    <button (click)="submitQuestionnaire()">Submit</button>
+  </div> -->
+
+  <div *ngIf="currentQuestionIndex < questions.length">
+    <h2>{{ questions[currentQuestionIndex].text }}</h2>
+  
+  <!-- Check the question type and display the appropriate input -->
+  <ng-container *ngIf="questions[currentQuestionIndex].type === 'range'; else checkboxSection">
+    <input type="range" min="1" max="10" [(ngModel)]="selectedChoices[currentQuestionIndex]" />
+    <p>Value: {{ selectedChoices[currentQuestionIndex] }}</p>
+  </ng-container>
+
+  <ng-template #checkboxSection>
+    <div *ngFor="let choice of questions[currentQuestionIndex].choices">
+      <input type="checkbox" [(ngModel)]="selectedChoices[currentQuestionIndex][choice]" [value]="choice" />
+      {{ choice }}
+    </div>
+  </ng-template>
+
+  <!-- Navigation buttons -->
+  <button (click)="previousQuestion()">Back</button>
+  <button (click)="nextQuestion()">Next</button>
+  </div>
+  
+  <div *ngIf="currentQuestionIndex === questions.length">
+    <h2>Review Your Answers</h2>
+    <div *ngFor="let question of questions; let i = index">
+      <p>{{ question.text }}</p>
+      <ul>
+        <li *ngFor="let choice of question.choices">
+          {{ choice }}: {{ selectedChoices[i][choice] }}
+        </li>
+      </ul>
+    </div>
+    <button (click)="submitAnswers()">Submit</button>
+  </div>

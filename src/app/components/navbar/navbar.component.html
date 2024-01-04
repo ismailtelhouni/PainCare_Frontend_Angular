@@ -1,0 +1,37 @@
+<!-- app.component.html -->
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="brand">
+              <a>Pain Care</a>
+            </div>
+      
+            <nav class="pc-links">
+              <ul>
+                <li *ngFor="let navItem of navItems">
+                  <a routerLinkActive="active" routerLink="home"(click)="navigateTo(navItem.link)" class="cp">
+                    {{ navItem.label }}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+      
+            <div class="menu" (click)="toggleMenu()">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <nav *ngIf="isMenuOpen" class="menu-container">
+              <ul>
+                <li *ngFor="let navItem of navItems" (click)="closeMenu()">
+                  <a routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)" class="cp">
+                    {{ navItem.label }}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+    </div>
+    
+  </header>
+  

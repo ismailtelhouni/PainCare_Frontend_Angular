@@ -1,0 +1,29 @@
+.article-card {
+    border-radius: 2px;
+    padding: 16px;
+    /* margin: 16px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* background-color: #dedede; */
+    /* background-image: url('../../../assets/images/gray.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    height: 160px;
+}
+
+/* .article-img{
+    background-color: #ffffff;
+} */
+.article-text{
+    background-color: #e2e0e0;
+    color: #5f5e5e;
+}
+.article-title{
+    text-transform: uppercase;
+    padding: 5px;
+    font-size: 22px;
+    color:  rgb(128, 191, 218);
+}
+
+.article-description{
+    font-size: 14px;
+}
