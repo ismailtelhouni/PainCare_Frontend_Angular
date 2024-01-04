@@ -60,13 +60,13 @@ export class OneBlogComponent implements OnInit{
             size: 16
           }
           },
-          datalabels: {
-            anchor: 'end',
-            align: 'end',
-            offset: { x: 8, y: 0 },
-            font: { size: 12 },
-            formatter: (value: any, context: any) => value
-          }
+          // datalabels: {
+          //   anchor: 'end',
+          //   align: 'end',
+          //   offset: { x: 8, y: 0 },
+          //   font: { size: 12 },
+          //   formatter: (value: any, context: any) => value
+          // }
       }
       }
     });
