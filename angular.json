@@ -26,7 +26,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss",
+              "src/styles.css",
               "src/styles/HcssF.css"
             ],
             "scripts": []
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "PainCare_Frontend_Angular:build:production"
+              "browserTarget": "PainCare_Frontend_Angular:build:production"
             },
             "development": {
-              "buildTarget": "PainCare_Frontend_Angular:build:development"
+              "browserTarget": "PainCare_Frontend_Angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "PainCare_Frontend_Angular:build"
+            "browserTarget": "PainCare_Frontend_Angular:build"
           }
         },
         "test": {
@@ -90,15 +90,10 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "src/styles.scss",
+              "src/styles.css",
               "src/styles/HcssF.css"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            "scripts": []
           }
         }
       }
