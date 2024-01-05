@@ -4,7 +4,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { OneBlogComponent } from './pages/blogs/one-blog/one-blog.component';
-import { TrackComponent } from './pages/femme/track/track.component';
+import { FemmeDashboardComponent } from './pages/femme/femme-dashboard/femme-dashboard.component';
+import { PainTrackComponent } from './pages/femme/pain-track/pain-track.component';
 
 const routes: Routes = [
   {
@@ -20,8 +21,11 @@ const routes: Routes = [
     path:"blog",
     component:OneBlogComponent
   },{
-    path:"track",
-    component:TrackComponent
+    path:"dashboard",
+    component:FemmeDashboardComponent
+  },{
+    path:"paintrack",
+    component:PainTrackComponent
   }
 ];
 

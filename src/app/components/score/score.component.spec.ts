@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrackComponent } from './track.component';
+import { ScoreComponent } from './score.component';
 
-describe('TrackComponent', () => {
-  let component: TrackComponent;
-  let fixture: ComponentFixture<TrackComponent>;
+describe('ScoreComponent', () => {
+  let component: ScoreComponent;
+  let fixture: ComponentFixture<ScoreComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TrackComponent]
+      declarations: [ScoreComponent]
     });
-    fixture = TestBed.createComponent(TrackComponent);
+    fixture = TestBed.createComponent(ScoreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

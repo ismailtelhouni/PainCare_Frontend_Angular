@@ -30,7 +30,7 @@ export class OneBlogComponent implements OnInit{
     Chart.register(...registerables);
 
     // Assuming you have a list of pain levels
-    const painLevels = [3, 6, 2, 8, 5, 7, 4, 9, 1, 10];
+    const painLevels = [0, 6, 2, 8, 5, 7, 4, 9, 1, 10];
 
     // Creating the chart
     const myChart = new Chart("myChart", {
@@ -38,11 +38,12 @@ export class OneBlogComponent implements OnInit{
       data: {
         labels: painLevels.map((_, index) => `Point ${index + 1}`),
         datasets: [{
-          label: 'Pain Levels',
+          label: 'pain Levels',
           data: painLevels,
           backgroundColor: "#0196FD",
           borderColor: "#0196FD",
-          borderWidth: 1
+          borderWidth: 1,
+          tension: 0.3
         }]
       },
       options: {
@@ -60,10 +61,12 @@ export class OneBlogComponent implements OnInit{
             size: 16
           }
           },
+          legend: {
+            display: false, // Set this to false to hide the legend
+          }
           // datalabels: {
           //   anchor: 'end',
           //   align: 'end',
-          //   offset: { x: 8, y: 0 },
           //   font: { size: 12 },
           //   formatter: (value: any, context: any) => value
           // }

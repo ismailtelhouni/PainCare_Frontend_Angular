@@ -7,8 +7,9 @@ import { ComponentsModule } from "../components/components.module";
 import { ArticlesComponent } from './articles/articles.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { OneBlogComponent } from './blogs/one-blog/one-blog.component';
-import { TrackComponent } from './femme/track/track.component';
 import { FormsModule } from '@angular/forms';
+import { FemmeDashboardComponent } from './femme/femme-dashboard/femme-dashboard.component';
+import { PainTrackComponent } from './femme/pain-track/pain-track.component';
 
 
 
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
         ArticlesComponent,
         BlogsComponent,
         OneBlogComponent,
-        TrackComponent,
+        FemmeDashboardComponent,
+        PainTrackComponent,
     ],
     imports: [
         CommonModule,

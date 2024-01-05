@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 
 // Define the Question type
 interface Question {
@@ -9,13 +8,11 @@ interface Question {
 }
 
 @Component({
-  selector: 'app-track',
-  templateUrl: './track.component.html',
-  styleUrls: ['./track.component.css']
+  selector: 'app-pain-track',
+  templateUrl: './pain-track.component.html',
+  styleUrls: ['./pain-track.component.css']
 })
-
-export class TrackComponent implements OnInit{
-
+export class PainTrackComponent {
   currentQuestionIndex: number = 0;
 
   questions: Question[] = [
@@ -23,12 +20,6 @@ export class TrackComponent implements OnInit{
     { text: 'Choose your answer:', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'] },
     { text: 'Choose your answer:', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'] },
   ];
-
-  // painLevel: number = 0;
-  // question2Choices: string[] = ['Option A', 'Option B', 'Option C'];
-  // question3Choices: string[] = ['Choice 1', 'Choice 2', 'Choice 3'];
-  // selectedChoices: any = {painLevel: 0, question2: {},question3: {}};
-  // progress: number = 0;
 
   selectedChoices: { [key: string]: any } = {};
 
@@ -46,12 +37,7 @@ export class TrackComponent implements OnInit{
   }
 
   submitAnswers() {
-    // Implement your logic to submit the questionnaire
       console.log('Selected Choices:', this.selectedChoices);
-      // painLevel: this.painLevel,
-      // question2: this.selectedChoices.question2,
-      // question3: this.selectedChoices.question3,
-    // });
   }
 
   ngOnInit() {
@@ -67,15 +53,5 @@ export class TrackComponent implements OnInit{
         this.selectedChoices[index] = 0;
       }
     });
-
-    // Initialize question2 choices to false
-    // this.question2Choices.forEach(choice => {
-    //   this.selectedChoices.question2[choice] = false;
-    // });
-  
-    // Initialize question3 choices to false
-    // this.question3Choices.forEach(choice => {
-    //   this.selectedChoices.question3[choice] = false;
-    // });
   }
 }
