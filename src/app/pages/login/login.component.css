@@ -1,0 +1,15 @@
+.nav{
+    background-color: rgb(128, 191, 218);
+}
+
+.border-bottom-input {
+    border: 0px;
+    border-bottom: 1px solid #ced4da; /* You can customize the color */
+    outline: 0px; /* Remove the default focus outline */
+    transition: border-color 0.3s;
+  }
+
+  .border-bottom-input:focus {
+    border-bottom-color: #007bff; /* Customize the border color on focus */
+    box-shadow: none; /* Remove the default focus box shadow */
+  }

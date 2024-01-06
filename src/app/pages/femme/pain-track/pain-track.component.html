@@ -1,0 +1,39 @@
+<app-header class="nav"></app-header>
+<div class="container w-100 h-h-400 d-flex flex-column align-items-center justify-content-center position-relative">
+    <div class="d-flex h-h-200 position-relative w-100 flex-column align-items-start">
+        <div *ngIf="currentQuestionIndex < questions.length">
+            <h2>{{ questions[currentQuestionIndex].text }}</h2>
+          
+          <!-- Check the question type and display the appropriate input -->
+          <ng-container *ngIf="questions[currentQuestionIndex].type === 'range'; else checkboxSection">
+            <input type="range" min="1" max="10" [(ngModel)]="selectedChoices[currentQuestionIndex]" />
+            <p>{{ selectedChoices[currentQuestionIndex]<1? 'None': selectedChoices[currentQuestionIndex]<4 ? 'Mild': selectedChoices[currentQuestionIndex]<6 ? 'Moderate': selectedChoices[currentQuestionIndex]<8 ?'Sever':selectedChoices[currentQuestionIndex]<10 ? 'Very Severe': 'Worst pain possible' }}</p>
+          </ng-container>
+          
+          <ng-template #checkboxSection>
+            <div *ngFor="let choice of questions[currentQuestionIndex].choices">
+              <input type="checkbox" [(ngModel)]="selectedChoices[currentQuestionIndex][choice]" [value]="choice" />
+              {{ choice }}
+            </div>
+          </ng-template>
+          
+          <!-- Navigation buttons -->
+          <button (click)="previousQuestion()" class="position-absolute back-btn">Back</button>
+          <button (click)="nextQuestion()" class="position-absolute next-btn">Next</button>
+          </div>
+          
+          <div class="position-relative" *ngIf="currentQuestionIndex === questions.length">
+            <h2>Review Your Answers</h2>
+            <div *ngFor="let question of questions; let i = index">
+              <p>{{ question.text }}</p>
+              <ul>
+                <li *ngFor="let choice of question.choices">
+                  {{ choice }}: {{ selectedChoices[i][choice] }}
+                </li>
+              </ul>
+            </div>
+            <button (click)="previousQuestion()" class="position-absolute back-btn">Back</button>
+            <button (click)="submitAnswers()" class="position-absolute next-btn">Submit</button>
+          </div>  
+    </div>
+</div>

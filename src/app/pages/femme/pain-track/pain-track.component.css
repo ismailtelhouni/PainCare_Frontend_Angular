@@ -1,0 +1,33 @@
+.nav{
+    background-color: rgb(128, 191, 218);
+  }
+  
+  .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    
+    .progress {
+      height: 20px;
+      background-color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background-color: #4caf50;
+    }
+    
+    .question {
+      margin-bottom: 20px;
+    }
+    
+
+.back-btn{
+    bottom:-20px;
+}
+
+.next-btn{
+    bottom:-20px;
+    left: 80px;
+}
