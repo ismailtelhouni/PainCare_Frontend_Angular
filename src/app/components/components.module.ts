@@ -8,6 +8,7 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
 import { ListBlogsComponent } from './list-blogs/list-blogs.component';
 import { ScoreComponent } from './score/score.component';
 import { FemmeActionsComponent } from './femme-actions/femme-actions.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import { FemmeActionsComponent } from './femme-actions/femme-actions.component';
     FemmeActionsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent,

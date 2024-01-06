@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './navbar.component.html',
@@ -13,6 +14,20 @@ export class NavbarComponent {
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
   }
+
+  selectedLanguage: any = 'en'; // Default language
+
+  onLanguageChange(event: Event) {
+    // Extract the selected value from the event
+    const selectedValue = (event.target as HTMLSelectElement).value;
+
+    // Update the selected language
+    this.selectedLanguage = selectedValue;
+
+    // Implement additional logic if needed
+    console.log('Selected Language:', this.selectedLanguage);
+  }
+
 
   isAuthenticated = this.authService.isAuthenticated();
 

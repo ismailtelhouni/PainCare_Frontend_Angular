@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { PainDataService } from 'src/app/services/apis/pain-data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-femme-dashboard',
@@ -8,10 +10,24 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./femme-dashboard.component.css']
 })
 export class FemmeDashboardComponent {
-  constructor(private route: ActivatedRoute) {}
 
+  sessionId: number|null = null; // Assuming you have a way to get the session ID
+  userId: number = -1; // Assuming you have a way to get the user ID
+
+  
+  constructor(private router: Router, private authService: AuthService,  private route: ActivatedRoute, private painDataService: PainDataService ) {}
+
+  navigateTo( route: string ): void {
+    this.router.navigate([ route ]);
+  }
   title = 'chartDemo';
   ngOnInit() {
+
+    this.userId = -1;
+    this.sessionId = this.authService.getSessionId();
+    if (this.sessionId === null) {
+      this.router.navigate(['/login']);
+    }
 
     Chart.register(...registerables);
 

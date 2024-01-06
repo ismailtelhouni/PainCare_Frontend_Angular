@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { FemmeDashboardComponent } from './femme/femme-dashboard/femme-dashboard.component';
 import { PainTrackComponent } from './femme/pain-track/pain-track.component';
 import { LoginComponent } from './login/login.component';
+import { DiagnosticTestComponent } from './femme/diagnostic-test/diagnostic-test.component';
 
 
 
@@ -25,6 +26,7 @@ import { LoginComponent } from './login/login.component';
         FemmeDashboardComponent,
         PainTrackComponent,
         LoginComponent,
+        DiagnosticTestComponent,
     ],
     imports: [
         CommonModule,

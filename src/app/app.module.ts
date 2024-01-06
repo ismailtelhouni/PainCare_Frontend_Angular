@@ -9,6 +9,8 @@ import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -23,7 +25,9 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     NgbModule,
     ComponentsModule,
     PagesModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    HttpClientModule,
+    FormsModule
   ],
   exports: [
     CanvasJSAngularChartsModule

@@ -98,4 +98,13 @@ header {
       }
     }
   }
+
+
+  .language-selector {
+    margin-left: 10px; /* Adjust margin as needed */
+  }
+  
+  label {
+    margin-right: 5px; /* Adjust margin as needed */
+  }
   

@@ -5,6 +5,15 @@
             <div class="brand">
               <a>Pain Care</a>
             </div>
+
+            <div class="language-selector">
+              <label for="language">Select Language:</label>
+              <select id="language" [(ngModel)]="selectedLanguage" (change)="onLanguageChange($event)">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <!-- Add more language options as needed -->
+              </select>
+            </div>
       
             <nav class="pc-links">
               <ul class="d-flex align-items-center">
