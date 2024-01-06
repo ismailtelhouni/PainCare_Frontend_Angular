@@ -16,9 +16,9 @@ export class PainTrackComponent {
   currentQuestionIndex: number = 0;
 
   questions: Question[] = [
-    { text: 'How would you rate your pain level?', type: 'range' },
-    { text: 'Choose your answer:', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'] },
-    { text: 'Choose your answer:', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'] },
+    { text: 'Pain level?', type: 'range' },
+    { text: 'Symptoms', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'] },
+    { text: 'What Makes Pain Worse?', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'] },
   ];
 
   selectedChoices: { [key: string]: any } = {};

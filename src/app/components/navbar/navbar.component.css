@@ -78,6 +78,11 @@ header {
         }
       }
     }
+
+    .btn-login{
+      /* background-color: black; */
+      border: 0;
+    }
   
     @media (max-width: 768px) {
         .pc-links{

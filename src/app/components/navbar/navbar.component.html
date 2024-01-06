@@ -7,9 +7,19 @@
             </div>
       
             <nav class="pc-links">
-              <ul>
+              <ul class="d-flex align-items-center">
                 <li *ngFor="let navItem of navItems">
-                  <a routerLinkActive="active" routerLink="home"(click)="navigateTo(navItem.link)" class="cp">
+                  <!-- Conditionally render a button for 'Login' -->
+                  <button class="btn-login px-2 py-1 h-bg-primary rounded-2" *ngIf="navItem.label == 'Login'" (click)="navigateTo(navItem.link)">Login</button>
+
+                  <!-- Conditionally render a button for 'Dashboard' -->
+                  <a class="px-3 fc-w cp" routerLinkActive="active" *ngIf="navItem.label == 'Logout' && isAuthenticated" (click)="navigateTo('dashboard')">Dashboard</a>
+
+                  <!-- Conditionally render a button for 'Logout' -->
+                  <button class="btn-login px-2 py-1 bg-danger fc-w rounded-2" *ngIf="navItem.label == 'Logout'" (click)="logout()">Lougout</button>
+
+                  <!-- Conditionally render a navigation link for other items -->
+                  <a class="cp" *ngIf="navItem.label != 'Login' && navItem.label != 'Logout'" routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)">
                     {{ navItem.label }}
                   </a>
                 </li>
@@ -24,7 +34,11 @@
             <nav *ngIf="isMenuOpen" class="menu-container">
               <ul>
                 <li *ngFor="let navItem of navItems" (click)="closeMenu()">
-                  <a routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)" class="cp">
+                  <!-- Conditionally render a button for 'Login' -->
+                  <button *ngIf="navItem.label == 'Login'">Login Button</button>
+                  
+                  <!-- Conditionally render a navigation link for other items -->
+                  <a *ngIf="navItem.label != 'Login'" routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)" class="cp">
                     {{ navItem.label }}
                   </a>
                 </li>

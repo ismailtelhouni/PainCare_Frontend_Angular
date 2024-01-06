@@ -10,6 +10,7 @@ import { OneBlogComponent } from './blogs/one-blog/one-blog.component';
 import { FormsModule } from '@angular/forms';
 import { FemmeDashboardComponent } from './femme/femme-dashboard/femme-dashboard.component';
 import { PainTrackComponent } from './femme/pain-track/pain-track.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -23,6 +24,7 @@ import { PainTrackComponent } from './femme/pain-track/pain-track.component';
         OneBlogComponent,
         FemmeDashboardComponent,
         PainTrackComponent,
+        LoginComponent,
     ],
     imports: [
         CommonModule,

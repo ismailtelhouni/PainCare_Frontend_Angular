@@ -22,3 +22,12 @@
       margin-bottom: 20px;
     }
     
+
+.back-btn{
+    bottom:-20px;
+}
+
+.next-btn{
+    bottom:-20px;
+    left: 80px;
+}
