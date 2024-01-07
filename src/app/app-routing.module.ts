@@ -8,6 +8,7 @@ import { FemmeDashboardComponent } from './pages/femme/femme-dashboard/femme-das
 import { PainTrackComponent } from './pages/femme/pain-track/pain-track.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DiagnosticTestComponent } from './pages/femme/diagnostic-test/diagnostic-test.component';
+import { NewFemmeComponent } from './pages/femme/new-femme/new-femme.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
   },{
     path:"login",
     component:LoginComponent
+  },{
+    path:"newuser",
+    component:NewFemmeComponent
   }
 ];
 

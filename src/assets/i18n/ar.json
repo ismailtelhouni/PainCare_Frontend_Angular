@@ -1,0 +1,22 @@
+{
+    "LOGIN": "تسجيل الدخول",
+    "LOGOUT": "تسجيل الخروج",
+    "Home": "الصفحة الرئيسية",
+    "Articles": "المقالات",
+    "Blogs": "المدونات",
+    "HomeQuote": "تمكين المرأة بالرحمة والرعاية، كل امرأة تستحق",
+    "HomeQuoteReste":"رحلة خالية من الألم",
+    "tryNow": "جربي الآن",
+    "DASHBOARD": "لوحة المعلومات",
+    "Hi":"مرحبا",
+    "LastScore":"النتيجة الأخيرة",
+    "LastScoreDesc": "قمي بتحديث نتائجك بانتظام",
+    "Diagnostic test" : "اختبار التشخيص",
+    "Profile" : "الحساب",
+    "Track": "المسار",
+    "chartTitle":"تشخيص الألم",
+    "Pain Locations": "مواقع الألم",
+    "Vous avez un compte": "لديك حساب ؟",
+    "Vous n'avez pas un compte": "ليس لديك حساب ؟",
+    "S'incrire": "سجل"
+}

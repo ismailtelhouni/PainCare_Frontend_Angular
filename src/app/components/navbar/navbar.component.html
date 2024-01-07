@@ -3,36 +3,44 @@
     <div class="container">
         <div class="navbar">
             <div class="brand">
-              <a>Pain Care</a>
-            </div>
-
-            <div class="language-selector">
-              <label for="language">Select Language:</label>
-              <select id="language" [(ngModel)]="selectedLanguage" (change)="onLanguageChange($event)">
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <!-- Add more language options as needed -->
-              </select>
+              <a class="cp d-flex align-items-end gap-2 " (click)="navigateTo('home')">
+                <img src="../../../assets/images/logologologo.png" alt="" height="50" class="p-0 m-0">
+                <!-- <img src="../../../assets/images/logotest.png" alt="" height="40" class="p-0 m-0"> -->
+                <h4 style="color: #fff6f6;">Pain Care</h4>
+              </a>
             </div>
       
-            <nav class="pc-links">
+            <nav class="pc-links d-flex align-items-center">
               <ul class="d-flex align-items-center">
                 <li *ngFor="let navItem of navItems">
                   <!-- Conditionally render a button for 'Login' -->
-                  <button class="btn-login px-2 py-1 h-bg-primary rounded-2" *ngIf="navItem.label == 'Login'" (click)="navigateTo(navItem.link)">Login</button>
+                  <button [class.active]="isActive('login')" class="btn-login px-2 py-1 h-bg-primary rounded-2" *ngIf="navItem.label == 'Login'" (click)="navigateTo(navItem.link)">{{ 'LOGIN' | translate }}</button>
 
                   <!-- Conditionally render a button for 'Dashboard' -->
-                  <a class="px-3 fc-w cp" routerLinkActive="active" *ngIf="navItem.label == 'Logout' && isAuthenticated" (click)="navigateTo('dashboard')">Dashboard</a>
+                  <a class="px-3 fc-w cp" [class.active]="isActive('dashboard')" routerLinkActive="active" *ngIf="navItem.label == 'Logout' && isAuthenticated" (click)="navigateTo('dashboard')">{{"DASHBOARD" | translate}}</a>
 
                   <!-- Conditionally render a button for 'Logout' -->
-                  <button class="btn-login px-2 py-1 bg-danger fc-w rounded-2" *ngIf="navItem.label == 'Logout'" (click)="logout()">Lougout</button>
+                  <button class="btn-login px-2 py-1 bg-danger fc-w rounded-2" *ngIf="navItem.label == 'Logout'" (click)="logout()">{{"LOGOUT"|translate}}</button>
 
                   <!-- Conditionally render a navigation link for other items -->
-                  <a class="cp" *ngIf="navItem.label != 'Login' && navItem.label != 'Logout'" routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)">
-                    {{ navItem.label }}
+                  <a class="cp" *ngIf="navItem.label != 'Login' && navItem.label != 'Logout'" [class.active]="isActive(navItem.link)" routerLink="home" (click)="navigateTo(navItem.link)">
+                    {{ navItem.label | translate }}
                   </a>
                 </li>
               </ul>
+
+
+              <div class="language-selector d-flex gap-2">
+                <select class="fc-w language" id="language" [(ngModel)]="selectedLanguage" (change)="onLanguageChange($event)">
+                  <option value="en">
+                    <span class="mx-2">EN</span>
+                  </option>
+                  <option value="fr">FR</option>
+                  <option value="ar">العربية</option>
+                </select>
+                <div [ngClass]="['flag', 'flag-' + selectedLanguage]"></div>
+              </div>
+
             </nav>
       
             <div class="menu" (click)="toggleMenu()">
@@ -48,7 +56,7 @@
                   
                   <!-- Conditionally render a navigation link for other items -->
                   <a *ngIf="navItem.label != 'Login'" routerLinkActive="active" routerLink="home" (click)="navigateTo(navItem.link)" class="cp">
-                    {{ navItem.label }}
+                    {{ navItem.label | translate }}
                   </a>
                 </li>
               </ul>
