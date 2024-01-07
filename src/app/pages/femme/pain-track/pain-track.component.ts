@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PainTrackDataService } from 'src/app/services/api/pain-track-data.service';
 
 // Define the Question type
 interface Question {
@@ -17,7 +18,10 @@ interface Question {
 })
 export class PainTrackComponent {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private painTrackDataService: PainTrackDataService
+    ) {}
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
   }
@@ -125,7 +129,22 @@ submitAnswers() {
   const trackData = this.generateTrackData(this.selectedChoices);
   console.log('Track Data:', trackData);
 
+  const sessionId = 1; // Replace with your actual session ID
+  const userId = 1; // Replace with your actual user ID
+
+  // Call the service to send track data to the backend
+  this.painTrackDataService.sendTrackData(trackData, sessionId, userId).subscribe(
+      response => {
+        // Handle success, e.g., navigate to another page
+        this.navigateTo('dashboard');
+      },
+      error => {
+        // Handle error
+        console.error('Error sending track data:', error);
+      }
+  );
+  
   this.navigateTo('dashboard');
-}
+  }
 
 }

@@ -4,6 +4,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { AvatarDialogComponent } from "./components/avatar-dialog/avatar-dialog.component";
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserDataService } from 'src/app/services/api/user-data.service';
+
+
+interface User {
+  name: string;
+  surname: string;
+  age: number;
+}
+
 @Component({
   selector: 'app-new-femme',
   templateUrl: './new-femme.component.html',
@@ -30,6 +39,7 @@ export class NewFemmeComponent implements OnInit{
     public dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
+    private userDataService: UserDataService
   ) { }
 
   navigateTo( route: string ): void {
@@ -62,7 +72,7 @@ export class NewFemmeComponent implements OnInit{
   }
 
   resetFields(){
-    this.avatarLink = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
+    this.avatarLink = "../../../../assets/images/avatar1.png";
     this.exampleForm = this.fb.group({
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
@@ -71,14 +81,22 @@ export class NewFemmeComponent implements OnInit{
   }
 
   onSubmit(value:any){
-    // this.firebaseService.createUser(value, this.avatarLink)
-    // .then(
-    //   res => {
-    //     this.resetFields();
-    //     this.router.navigate(['/home']);
-    //   }
-    // )
-    console.log(value);
+    const user:User = {
+      name:value.name,
+      surname:value.surname,
+      age:value.age,
+    };
+    
+    // Send the user data to the backend
+    this.userDataService.createUser(user).subscribe(
+      (response) => {
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        console.error('Error creating user:', error);
+      }
+    );
+    console.log(user);
   }
 
 }

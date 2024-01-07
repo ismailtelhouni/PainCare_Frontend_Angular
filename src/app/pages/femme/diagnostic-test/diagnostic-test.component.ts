@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DiagnosticDataService } from 'src/app/services/api/diagnostic-data.service';
 
 interface Question {
   text: string;
@@ -15,7 +16,10 @@ interface Question {
 })
 export class DiagnosticTestComponent {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private diagnosticDataService: DiagnosticDataService
+    ) {}
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
   }
@@ -61,6 +65,19 @@ export class DiagnosticTestComponent {
   submitAnswers() {
     this.navigateTo('/dashboard');
     console.log('Selected Choices:', this.selectedChoices);
+
+    this.diagnosticDataService.submitDiagnosticTest(this.selectedChoices,-1,-1).subscribe(
+      (response) => {
+        // Handle the response from the backend if needed
+        console.log('Backend response:', response);
+        // Navigate to the dashboard or another appropriate page
+        this.navigateTo('/dashboard');
+      },
+      (error) => {
+        // Handle errors from the backend
+        console.error('Error submitting diagnostic test:', error);
+      }
+    );
   }
 
   ngOnInit() {

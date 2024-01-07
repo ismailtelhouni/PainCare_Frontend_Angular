@@ -14,6 +14,8 @@ export class FemmeDashboardComponent {
 
   sessionId: number|null = null; // Assuming you have a way to get the session ID
   userId: number = -1; // Assuming you have a way to get the user ID
+  painLevels: number[] = [];
+  painLocations: any[] = [];
 
   
   constructor(
@@ -29,7 +31,75 @@ export class FemmeDashboardComponent {
     this.router.navigate([ route ]);
   }
   title = 'chartDemo';
-  
+
+
+
+  ngOnInit() {
+
+    this.userId = -1;
+    this.sessionId = this.authService.getSessionId();
+    if (this.sessionId === null) {
+      this.router.navigate(['/login']);
+    }
+    
+    Chart.register(...registerables);
+      const painLevels = [0, 6, 2, 8, 5, 7, 4, 9, 1, 10];
+      const painLocations = [
+        { type: 'Type1', count: 15 },
+        { type: 'Type2', count: 30 },
+        { type: 'Type3', count: 20 },
+        // ... other types
+      ];
+      this.updateChartTitle(painLevels);
+      this.updateChartTitleLocations(painLocations);
+
+
+    //   // Fetch pain levels from the backend
+    //   this.painDataService.getPainLevelData(this.sessionId, this.userId).subscribe(
+    //   (painLevels) => {
+    //     this.painLevels = painLevels;
+    //     this.updateChartTitle(painLevels);
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching pain levels:', error);
+    //   }
+    // );
+
+    // // Fetch pain locations from the backend
+    // this.painDataService.getPainLocationsData(this.sessionId, this.userId).subscribe(
+    //   (painLocations) => {
+    //     this.painLocations = painLocations;
+    //     this.updateChartTitleLocations(painLocations);
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching pain locations:', error);
+    //   }
+    // );
+
+    this.translateService.onLangChange.subscribe(() => {
+      console.log('Language changed');
+      const painLevels = [0, 6, 2, 8, 5, 7, 4, 9, 1, 10];
+      this.updateChartTitle(painLevels);
+
+      const painLocations = [
+        { type: 'Type1', count: 15 },
+        { type: 'Type2', count: 30 },
+        { type: 'Type3', count: 20 },
+        // ... other types
+      ];
+      this.updateChartTitleLocations(painLocations);
+    });
+  }
+
+
+
+
+
+
+
+
+
+
 
   updateChartTitle(painLevels: any): void {
     const existingChart = Chart.getChart("myChart");
@@ -86,8 +156,6 @@ export class FemmeDashboardComponent {
     // Manually trigger change detection
     this.cdr.detectChanges();
   }
-
-
 
   updateChartTitleLocations(painLocations: any): void {
     const existingChart = Chart.getChart("myChartPie");
@@ -148,45 +216,5 @@ export class FemmeDashboardComponent {
 
     // Manually trigger change detection
     this.cdr.detectChanges();
-  }
-
-
-  ngOnInit() {
-
-    Chart.register(...registerables);
-      const painLevels = [0, 6, 2, 8, 5, 7, 4, 9, 1, 10];
-      this.updateChartTitle(painLevels);
-
-      const painLocations = [
-        { type: 'Type1', count: 15 },
-        { type: 'Type2', count: 30 },
-        { type: 'Type3', count: 20 },
-        // ... other types
-      ];
-
-      this.updateChartTitleLocations(painLocations);
-
-    this.translateService.onLangChange.subscribe(() => {
-      console.log('Language changed');
-      const painLevels = [0, 6, 2, 8, 5, 7, 4, 9, 1, 10];
-      this.updateChartTitle(painLevels);
-
-      const painLocations = [
-        { type: 'Type1', count: 15 },
-        { type: 'Type2', count: 30 },
-        { type: 'Type3', count: 20 },
-        // ... other types
-      ];
-
-      this.updateChartTitleLocations(painLocations);
-    });
-
-    this.userId = -1;
-    this.sessionId = this.authService.getSessionId();
-    if (this.sessionId === null) {
-      this.router.navigate(['/login']);
-    }
-    
-    
   }
 }
