@@ -20,6 +20,25 @@ header {
         font-size: 1.5em;
       }
     }
+    
+    .pc-links a.active{
+      position: relative;
+      height: 100%;
+    }
+    .pc-links a.active::after{
+        color: #ffffff !important;
+        content: '';
+        position: absolute;
+        bottom: -1.9rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        /* Adjust the width of the line */
+        height: 4px;
+        /* Adjust the height of the line */
+        background-color: white;
+        /* Line color */
+    }
   
     .menu {
       display: none;
@@ -32,6 +51,7 @@ header {
         width: 25px;
         margin: 5px 0;
         transition: transform 0.3s ease-in-out;
+        background-color: #ffffff;
       }
     }
   
@@ -86,16 +106,112 @@ header {
   
     @media (max-width: 768px) {
         .pc-links{
-            display: none;
+            display: none !important;
         }
       .menu {
-        display: flex;
+        display: flex !important;
         transform: rotate(0deg);
+        position: relative;
+        z-index: 10;
+        /* background-color: aqua; */
       }
   
       .menu-container {
         transform: translateY(0);
+        position: absolute;
+        z-index: 100;
       }
     }
   }
+
+
+  .language-selector {
+    margin-left: 10px; /* Adjust margin as needed */
+  }
+  
+  label {
+    margin-right: 5px; /* Adjust margin as needed */
+  }
+  
+
+  .language{
+    background-color: rgb(128, 191, 218);
+  }
+
+  .language-selector {
+    display: flex;
+    align-items: center;
+  }
+
+
+  .flag {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    margin-right: 5px; /* Adjust the spacing between flag and language code */
+    background-size: contain;
+  }
+  
+  .flag-en {
+    background-image: url('../../../assets/images/en.png');
+  }
+  
+  .flag-fr {
+    background-image: url('../../../assets/images/fr.png');
+  }
+
+  .flag-ar {
+    background-image: url('../../../assets/images/ar.png');
+  }
+
+
+  select {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    /* width: 100%; */
+  /* min-width: 15ch;
+  max-width: 30ch; */
+  border: 1px solid white;
+  border-radius: 0.25em;
+  padding: 0.1em 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: transparent;
+  /* background-image: linear-gradient(to top, #f9f9f9, #fff 33%); */
+  display: grid;
+  grid-template-areas: "select";
+
+  align-items: center;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
+  :root {
+    --select-border: #777;
+    --select-focus: rgb(0, 0, 0);
+    --select-arrow: var(--select-border);
+  }
+
+  .select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: rgb(233, 147, 147);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    justify-self: end;
+  }
+
+select,
+.select:after {
+  grid-area: select;
+}
+
+
+
   

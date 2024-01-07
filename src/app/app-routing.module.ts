@@ -7,6 +7,8 @@ import { OneBlogComponent } from './pages/blogs/one-blog/one-blog.component';
 import { FemmeDashboardComponent } from './pages/femme/femme-dashboard/femme-dashboard.component';
 import { PainTrackComponent } from './pages/femme/pain-track/pain-track.component';
 import { LoginComponent } from './pages/login/login.component';
+import { DiagnosticTestComponent } from './pages/femme/diagnostic-test/diagnostic-test.component';
+import { NewFemmeComponent } from './pages/femme/new-femme/new-femme.component';
 
 const routes: Routes = [
   {
@@ -28,8 +30,14 @@ const routes: Routes = [
     path:"paintrack",
     component:PainTrackComponent
   },{
+    path:"diagnostictest",
+    component:DiagnosticTestComponent
+  },{
     path:"login",
     component:LoginComponent
+  },{
+    path:"newuser",
+    component:NewFemmeComponent
   }
 ];
 

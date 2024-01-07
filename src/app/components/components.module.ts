@@ -8,6 +8,16 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
 import { ListBlogsComponent } from './list-blogs/list-blogs.component';
 import { ScoreComponent } from './score/score.component';
 import { FemmeActionsComponent } from './femme-actions/femme-actions.component';
+import { FormsModule } from '@angular/forms';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 
@@ -23,7 +33,17 @@ import { FemmeActionsComponent } from './femme-actions/femme-actions.component';
     FemmeActionsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     NavbarComponent,

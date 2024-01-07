@@ -1,0 +1,22 @@
+{
+    "LOGIN": "connexion",
+    "LOGOUT": "Déconnexion",
+    "Home": "Accueil",
+    "Articles": "articles",
+    "Blogs": "Blogs",
+    "HomeQuote": "CHAQUE FEMME MÉRITE UN VOYAGE",
+    "HomeQuoteReste":"SANS DOULEUR",
+    "tryNow": "Essayer Maintenant",
+    "DASHBOARD": "tableau de bord",
+    "Hi":"Bonjour",
+    "LastScore":"Dernier Score",
+    "LastScoreDesc": "Mettez à jour votre score régulièrement",
+    "Diagnostic test" : "Test de diagnostic",
+    "Profile" : "Profil",
+    "Track": "Piste",
+    "chartTitle":"Diagnostic de la douleur",
+    "Pain Locations": "Zones de douleur",
+    "Vous avez un compte": "You have an account ?",
+    "Vous n'avez pas un compte": "Vous n'avez pas un compte ?",
+    "S'incrire": "S'incrire"
+}

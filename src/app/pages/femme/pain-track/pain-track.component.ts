@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PainTrackDataService } from 'src/app/services/api/pain-track-data.service';
 
 // Define the Question type
 interface Question {
   text: string;
   type: 'range' | 'checkbox';
   choices?: any[];
+  displayChoices?: boolean;
+  values?: any;
 }
 
 @Component({
@@ -13,31 +17,58 @@ interface Question {
   styleUrls: ['./pain-track.component.css']
 })
 export class PainTrackComponent {
+
+  constructor(
+    private router: Router,
+    private painTrackDataService: PainTrackDataService
+    ) {}
+  navigateTo( route: string ): void {
+    this.router.navigate([ route ]);
+  }
+
   currentQuestionIndex: number = 0;
 
   questions: Question[] = [
-    { text: 'Pain level?', type: 'range' },
-    { text: 'Symptoms', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'] },
-    { text: 'What Makes Pain Worse?', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'] },
+    { text: 'Pain level?', type: 'range'},
+    { text: 'Symptoms', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'], displayChoices: false, values:[0,1,2] },
+    { text: 'What Makes Pain Worse?', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'], displayChoices: false, values:[0,1,2] },
   ];
 
   selectedChoices: { [key: string]: any } = {};
 
-  nextQuestion() {
-    if (this.currentQuestionIndex < this.questions.length) {
-      this.currentQuestionIndex++;
-    }
-  }
-
   // Function to move to the previous question
   previousQuestion() {
-    if (this.currentQuestionIndex > 0) {
-      this.currentQuestionIndex--;
-    }
+    this.navigateTo('dashboard');
   }
 
-  submitAnswers() {
-      console.log('Selected Choices:', this.selectedChoices);
+  generateTrackData(selectedChoices: { [key: string]: any }): any {
+    const trackData: any = {};
+
+    trackData[0] = selectedChoices[0];
+  
+    Object.keys(this.selectedChoices).forEach((keyG,i) => {
+      if(keyG=='0'){
+        trackData[0] = selectedChoices[0];
+      }
+      else{
+        let answer:string="";
+        const selectedChoicesForOne = this.selectedChoices[keyG];
+        Object.keys(selectedChoicesForOne).forEach((key,j) => {
+          const value = selectedChoicesForOne[key];
+          if(value){
+            if(answer==""){
+              answer+=`${this.questions[i].values[j]}`;
+            }else{
+              answer+=`,${this.questions[i].values[j]}`;
+            }
+            // console.log(answer);
+          }
+          // console.log(value);
+        });
+        trackData[keyG] = answer;
+      }
+    });
+    return trackData;
   }
 
   ngOnInit() {
@@ -54,4 +85,66 @@ export class PainTrackComponent {
       }
     });
   }
+
+  toggleChoices(question: any): void {
+    question.displayChoices = !question.displayChoices;
+  }
+
+
+  getColorForPainLevel(painLevel: number): string {
+    // Define color gradient based on pain levels
+    const gradient = [
+      { value: 1, color: '#5643DC' }, // Green
+      { value: 4, color: '#B8E3DD' }, // Yellow
+      { value: 6, color: '#E0BF68' }, // Orange
+      { value: 8, color: '#EEB07A' }, // Red-Orange
+      { value: 10, color: '#EE4743' } // Red
+    ];
+
+    // Find the appropriate color based on the pain level
+  const color = gradient.find(item => painLevel <= item.value)?.color || '#000000';
+
+  return color;
+}
+
+getPainDescription(painLevel: number): string {
+  // Define pain descriptions based on pain levels
+  if (painLevel < 1) {
+    return 'None';
+  } else if (painLevel < 4) {
+    return 'Mild';
+  } else if (painLevel < 6) {
+    return 'Moderate';
+  } else if (painLevel < 8) {
+    return 'Severe';
+  } else if (painLevel < 10) {
+    return 'Very Severe';
+  } else {
+    return 'Worst pain possible';
+  }
+}
+
+
+submitAnswers() {
+  const trackData = this.generateTrackData(this.selectedChoices);
+  console.log('Track Data:', trackData);
+
+  const sessionId = 1; // Replace with your actual session ID
+  const userId = 1; // Replace with your actual user ID
+
+  // Call the service to send track data to the backend
+  this.painTrackDataService.sendTrackData(trackData, sessionId, userId).subscribe(
+      response => {
+        // Handle success, e.g., navigate to another page
+        this.navigateTo('dashboard');
+      },
+      error => {
+        // Handle error
+        console.error('Error sending track data:', error);
+      }
+  );
+  
+  this.navigateTo('dashboard');
+  }
+
 }

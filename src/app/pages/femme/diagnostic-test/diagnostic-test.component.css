@@ -1,0 +1,123 @@
+.nav{
+    background-color: rgb(128, 191, 218);
+  }
+  
+  .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    
+    .progress {
+      height: 20px;
+      background-color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background-color: #4caf50;
+    }
+    
+    .question {
+      margin-bottom: 20px;
+    }
+    
+
+.back-btn{
+    bottom:-60px;
+    border: 0px;
+}
+
+.next-btn{
+    bottom:-60px;
+    right: 0px;
+    border: 0px;
+    background-color: #4caf50;
+    color: white;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #ddd;
+    height: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+  }
+
+  .invalid-answer {
+    border: 1px solid red;
+    color: red;
+    background-color: #4caf50;
+  }
+
+
+
+  /* Add this to your component's style file or global style file */
+
+/* Style for the container of radio buttons */
+.radio-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Style for individual radio button */
+  .radio-input {
+    margin-right: 5px; /* Adjust spacing between radio buttons */
+  }
+  
+  /* Style for radio button label */
+  .radio-label {
+    font-size: 14px; /* Adjust font size */
+    color: #c75757; /* Adjust text color */
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+
+    display: grid;
+    place-content: center;
+  }
+
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #9456c6;
+  }
+
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+  input[type="radio"].invalid-answer{
+    border: 2px solid red;
+}
+
+
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+  }
+
+.answers-review{
+    max-height: 200px;
+    overflow-y: auto;
+}

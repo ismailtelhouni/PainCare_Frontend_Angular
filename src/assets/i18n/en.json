@@ -1,0 +1,22 @@
+{
+    "LOGIN": "login",
+    "LOGOUT": "Logout",
+    "Home": "Home",
+    "Articles": "articles",
+    "Blogs": "Blogs",
+    "HomeQuote": "EMPOWERING WOMEN WITH COMPASSION AND CARE, EVERY WOMAN DESERVES A",
+    "HomeQuoteReste":"PAIN-FREE JOURNEY TO WELLNESS",
+    "tryNow": "Try Now",
+    "DASHBOARD": "Dashboard",
+    "Hi":"Hi",
+    "LastScore":"Last Score",
+    "LastScoreDesc": "Update your score regularly",
+    "Diagnostic test" : "Diagnostic test",
+    "Profile" : "Profile",
+    "Track": "Track",
+    "chartTitle":"Pain Diagnostic",
+    "Pain Locations": "Pain Locations",
+    "Vous avez un compte": "Vous avez un compte",
+    "Vous n'avez pas un compte": "You do not have an account ?",
+    "S'incrire": "Sign Up"
+}

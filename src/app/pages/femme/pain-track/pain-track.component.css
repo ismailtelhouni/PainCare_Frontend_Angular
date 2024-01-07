@@ -31,3 +31,85 @@
     bottom:-20px;
     left: 80px;
 }
+
+
+h4{
+  width: 100%;
+}
+.check {
+  cursor: pointer;
+  border: 1px solid #ddd; /* Add your border styles here */
+  padding: 10px;
+  position: relative;
+  width: 100% !important;
+}
+
+h4.cp {
+  position: relative;
+  margin-right: 80px;
+}
+
+h4.cp.active {
+  border-bottom: none; /* Remove bottom border when active */
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+h4.cp.active .arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+
+
+.back-btn{
+  bottom:-60px;
+  border: 0px;
+}
+
+.next-btn{
+  bottom:-60px;
+  right: 0px;
+  border: 0px;
+  background-color: #4caf50;
+  color: white;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  /* border-radius: 50%; */
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  /* border-radius: 50%; */
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #9456c6;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"].invalid-answer{
+  border: 2px solid red;
+}

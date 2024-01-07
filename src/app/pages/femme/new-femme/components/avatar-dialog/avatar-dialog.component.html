@@ -1,0 +1,12 @@
+<div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5>Select Avatar</h5>
+      </div>
+    </div>
+    <div class="d-flex align-content-center flex-wrap">
+      <div *ngFor="let avatar of avatars">
+        <img class="img-thumbnail" [src]=avatar.link (click)= "close(avatar)">
+      </div>
+    </div>
+  </div>
