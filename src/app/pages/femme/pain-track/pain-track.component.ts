@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PainTrackDataService } from 'src/app/services/api/pain-track-data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 // Define the Question type
 interface Question {
@@ -20,7 +21,8 @@ export class PainTrackComponent {
 
   constructor(
     private router: Router,
-    private painTrackDataService: PainTrackDataService
+    private painTrackDataService: PainTrackDataService,
+    private authService: AuthService
     ) {}
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
@@ -79,8 +81,14 @@ export class PainTrackComponent {
     const femmeIdString = localStorage.getItem("femmeId");
     const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
+    const userId = this.authService.getUserId();
+    const u = userId==null?null:userId-1;
+
+    console.log("femmefemmefemmefemmeUser id: ",userId);
+    console.log("femmefemmefemmefemmefemme id: ",u);
+
     trackData['femme'] = {
-      'femmeId': femmeId
+      'femmeId': u
     };
     return trackData;
   }

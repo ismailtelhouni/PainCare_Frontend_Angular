@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-landing',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./left-landing.component.css']
 })
 export class LeftLandingComponent {
+
+  constructor(
+    private router: Router,
+  ){}
+
+  navigateTo( route: string ): void {
+    this.router.navigate([ route ]);
+  }
 }

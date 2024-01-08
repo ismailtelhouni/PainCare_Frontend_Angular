@@ -116,12 +116,6 @@ export class FemmeDashboardComponent {
     );
 
     Chart.register(...registerables);
-    const painLocations = [
-      { type: 'Type1', count: 15 },
-      { type: 'Type2', count: 30 },
-      { type: 'Type3', count: 20 },
-      // ... other types
-    ];
     this.updateChartTitle(this.painLevels);
     this.updateChartTitleLocations(this.painLocations);
 
@@ -148,7 +142,11 @@ export class FemmeDashboardComponent {
     const femmeIdString = localStorage.getItem("femmeId");
     const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
-    this.userDataService.getFemmeById(femmeId).subscribe(
+    const u = this.userId==null?null:this.userId-1;
+    this.femmeId=u;
+
+
+    this.userDataService.getFemmeById(u).subscribe(
       (response) => {
         console.log("femeeeNaaaaaaaaaaaaaaaaaaammmmmmmmmmmeeeeeeeeeee",response)
         this.userSurname = response.prenom;

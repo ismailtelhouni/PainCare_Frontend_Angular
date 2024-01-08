@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class BlogCardComponent {
   @Input() title: string = '';
+  @Input() i: number = 7;
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DiagnosticDataService } from 'src/app/services/api/diagnostic-data.service';
 import { ScoreDataService } from 'src/app/services/api/score-data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-score',
@@ -14,7 +15,8 @@ export class ScoreComponent {
 
   constructor(
     private diagnosticDataService: DiagnosticDataService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService
     ) {}
 
   ngOnInit() {
@@ -25,7 +27,11 @@ export class ScoreComponent {
     const femmeIdString = localStorage.getItem("femmeId");
     const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
-    this.diagnosticDataService.getLastDiagnosticTest(femmeId).subscribe(
+    const userId = this.authService.getUserId();
+    const u = userId==null?null:userId-1;
+
+    console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu: ",u);
+    this.diagnosticDataService.getLastDiagnosticTest(u).subscribe(
       (response) => {
         this.scoreValue = response;
         console.log("scoreeeeeeeeeeeeeeeeee: ",response[0].reponse);

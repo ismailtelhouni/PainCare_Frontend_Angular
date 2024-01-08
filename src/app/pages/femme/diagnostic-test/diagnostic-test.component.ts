@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DiagnosticDataService } from 'src/app/services/api/diagnostic-data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface Question {
   text: string;
@@ -18,7 +19,8 @@ export class DiagnosticTestComponent {
 
   constructor(
     private router: Router,
-    private diagnosticDataService: DiagnosticDataService
+    private diagnosticDataService: DiagnosticDataService,
+    private authService: AuthService
     ) {}
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
@@ -76,10 +78,13 @@ export class DiagnosticTestComponent {
     const femmeIdString = localStorage.getItem("femmeId");
     const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
+    const userId = this.authService.getUserId();
+    const u = userId==null?null:userId-1;
+
     const data = {
       reponse: formattedResponse,
       femme: {
-        femmeId: femmeId // Replace with the actual femmeId
+        femmeId: u // Replace with the actual femmeId
       }
     };
 
