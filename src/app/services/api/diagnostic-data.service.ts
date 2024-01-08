@@ -17,7 +17,7 @@ export class DiagnosticDataService {
 
   submitDiagnosticTest(selectedChoices: any,sessionId: number, userId: number): Observable<any> {
 
-    const apiUrl = `${this.backendHost}/api/submitDiagnosticTest`;
+    const apiUrl = `${this.backendHost}/tests`;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,8 +28,13 @@ export class DiagnosticDataService {
     const options = { headers };
 
     // You might need to adjust the request structure based on your backend's expectations
-    const requestData = { selectedChoices };
+    // const requestData = { selectedChoices };
 
-    return this.http.post<any>(apiUrl,requestData,options);
+    return this.http.post<any>(apiUrl,selectedChoices,options);
+  }
+
+  getLastDiagnosticTest(femmeId: any): Observable<any> {
+    const apiUrl = `${this.backendHost}/tests/femme/${femmeId}`;
+    return this.http.get(apiUrl);
   }
 }

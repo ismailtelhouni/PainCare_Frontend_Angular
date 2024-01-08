@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BackendConfigService } from './backend-config.service';
 
@@ -12,34 +12,34 @@ export class PainDataService {
     private backendConfigService: BackendConfigService
     ) {}
 
-  getPainData(sessionId: number, userId: number): Observable<any[]> {
+  getPainData(sessionId: number, userId: any): Observable<any[]> {
 
     const backendHost = this.backendConfigService.getBackendHost();
-    const apiUrl = `${backendHost}/api/pain`;
+    const apiUrl = `${backendHost}/diagnostics/byfemme/${userId}`;
 
-    // Include session ID and user ID in the request headers or parameters
-    const options = {
-      headers: {
-        'Session-ID': sessionId.toString(),
-        'User-ID': userId.toString(),
-      },
-    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': sessionId,
+      'User-ID': userId,
+    });
+
+    const options = { headers };
     
     return this.http.get<any[]>(apiUrl,options);
   }
 
-  getPainLevelData(sessionId: any, userId: number): Observable<any[]> {
+  getPainLevelData(sessionId: any, userId: any): Observable<any[]> {
 
     const backendHost = this.backendConfigService.getBackendHost();
-    const apiUrl = `${backendHost}/api/painLevel`;
+    const apiUrl = `${backendHost}/diagnostics/byfemme/${userId}`;
 
-    // Include session ID and user ID in the request headers or parameters
+
     const options = {
       headers: {
-        'Session-ID': sessionId.toString(),
-        'User-ID': userId.toString(),
-      },
-    };
+          'Authorization': 'Bearer ' + sessionId,  // Adjust based on your token mechanism
+          'User-ID': userId.toString(),
+          },
+      };
     
     return this.http.get<any[]>(apiUrl,options);
   }

@@ -16,7 +16,7 @@ export class PainTrackDataService {
   sendTrackData(trackData: any,sessionId: number, userId: number): Observable<any> {
 
     const backendHost = this.backendConfigService.getBackendHost();
-    const apiUrl = `${backendHost}/api/track`;
+    const apiUrl = `${backendHost}/diagnostics`;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
