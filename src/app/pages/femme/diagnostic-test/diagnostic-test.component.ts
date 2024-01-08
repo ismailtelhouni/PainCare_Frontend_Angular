@@ -75,16 +75,14 @@ export class DiagnosticTestComponent {
     const formattedResponse = Object.values(this.selectedChoices).join(',');
 
     // Create the data object to send to the backend
-    const femmeIdString = localStorage.getItem("femmeId");
-    const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
-    const userId = this.authService.getUserId();
-    const u = userId==null?null:userId-1;
+    const femmeId = this.authService.getFemmeId();
+    
 
     const data = {
       reponse: formattedResponse,
       femme: {
-        femmeId: u // Replace with the actual femmeId
+        femmeId: femmeId // Replace with the actual femmeId
       }
     };
 

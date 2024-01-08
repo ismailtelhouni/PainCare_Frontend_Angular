@@ -12,6 +12,15 @@ export class AuthService {
 
   backendHost = this.backendConfigService.getBackendHost();
 
+  private sessionStorageKey = 'authSession';
+  private sessionStorageId = 'userIdSession';
+  private sessionStorageFemmeId = 'femmeIdSession';
+  private sessionStorageLogin = 'loginSession';
+  private sessionId: number | null = null;
+  private femmeId: number | null = null;
+  private userId: number | null = null;
+  private isAuthenticatedValue = false;
+
   constructor(
     private http: HttpClient,
     private backendConfigService: BackendConfigService
@@ -23,14 +32,6 @@ export class AuthService {
     return this.http.post<any>(apiUrl, authData);
   }
 
-  private authenticatedUser = { email: 'hussien.chakra@gmail.com', password: 'Azerreza' };
-  private sessionStorageKey = 'authSession';
-  private sessionStorageId = 'userIdSession';
-  private sessionStorageLogin = 'loginSession';
-  private sessionId: number | null = null;
-  private userId: number | null = null;
-  private isAuthenticatedValue = false;
-
   async authenticate(email: string, password: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
     this.authenticateBackend(email, password).subscribe(
@@ -38,9 +39,11 @@ export class AuthService {
         if (response.message=='success') {
           // Authentication successful
           const sessionId = response.token;
-          const userId = response.id;
+          const userId = response.userId;
+          const femmeId = response.femmeId;
           this.sessionId = sessionId;
           this.userId = userId;
+          this.femmeId = femmeId;
           this.storeSession();
           this.isAuthenticatedValue = true;
           console.log("succes login");
@@ -90,6 +93,12 @@ export class AuthService {
     }
     return this.userId;
   }
+  getFemmeId(): number | null {
+    if (this.femmeId === null) {
+      this.loadFemmeId();
+    }
+    return this.femmeId;
+  }
 
   logout(): void {
     this.sessionId = null;
@@ -100,6 +109,7 @@ export class AuthService {
 
   private storeSession(): void {
     localStorage.setItem(this.sessionStorageKey, JSON.stringify({ sessionId: this.sessionId }));
+    localStorage.setItem(this.sessionStorageFemmeId, JSON.stringify({ femmeId: this.femmeId }));
     localStorage.setItem(this.sessionStorageId, JSON.stringify({ userId: this.userId }));
     localStorage.setItem(this.sessionStorageLogin, 'true');
   }
@@ -125,6 +135,20 @@ export class AuthService {
       const parsedSession = JSON.parse(storedSession);
       if (parsedSession && parsedSession.userId) {
         this.userId = parsedSession.userId;
+        this.isAuthenticatedValue = true;
+      } else {
+        // If the stored session is invalid or incomplete, remove it
+        this.removeSession();
+      }
+    }
+  }
+
+  private loadFemmeId(): void {
+    const storedSession = localStorage.getItem(this.sessionStorageFemmeId);
+    if (storedSession) {
+      const parsedSession = JSON.parse(storedSession);
+      if (parsedSession && parsedSession.femmeId) {
+        this.femmeId = parsedSession.femmeId;
         this.isAuthenticatedValue = true;
       } else {
         // If the stored session is invalid or incomplete, remove it
