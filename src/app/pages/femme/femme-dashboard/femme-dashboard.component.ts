@@ -47,9 +47,10 @@ export class FemmeDashboardComponent {
     console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",localStorage.getItem("userIdSession"));
     this.userId = this.authService.getUserId();
     this.sessionId = this.authService.getSessionId();
+    this.femmeId = this.authService.getFemmeId();
 
     console.log("token",this.sessionId)
-    console.log(this.userId);
+    console.log("femmmmmmmmmmmmmmmmmmme id ; ",this.femmeId);
     if (this.sessionId === null) {
       this.router.navigate(['/login']);
     }
@@ -69,9 +70,9 @@ export class FemmeDashboardComponent {
         this.painLocations = response.map((item) => parseInt(item.painLevel));
         this.updateChartTitle(this.painLevels);
 
-        this.femmeId = response[0]?.femme?.femmeId;
-        localStorage.setItem("femmeId",JSON.stringify(this.femmeId));
-        console.log("femmeeeeeeeeeeeeeeee",this.femmeId);
+        // this.femmeId = response[0]?.femme?.femmeId;
+        // localStorage.setItem("femmeId",JSON.stringify(this.femmeId));
+        // console.log("femmeeeeeeeeeeeeeeee",this.femmeId);
 
         // Assuming your response is stored in the variable 'response'
         const painLocationsArray = response.map((item) => item.painLocations.split(',').map(Number)).flat();
@@ -139,14 +140,14 @@ export class FemmeDashboardComponent {
     });
 
 
-    const femmeIdString = localStorage.getItem("femmeId");
-    const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
+    // const femmeIdString = localStorage.getItem("femmeId");
+    // const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
-    const u = this.userId==null?null:this.userId-1;
-    this.femmeId=u;
+    // const u = this.userId==null?null:this.userId-1;
+    // this.femmeId=u;
 
 
-    this.userDataService.getFemmeById(u).subscribe(
+    this.userDataService.getFemmeById(this.femmeId).subscribe(
       (response) => {
         console.log("femeeeNaaaaaaaaaaaaaaaaaaammmmmmmmmmmeeeeeeeeeee",response)
         this.userSurname = response.prenom;

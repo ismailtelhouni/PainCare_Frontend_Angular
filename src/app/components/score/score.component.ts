@@ -24,14 +24,10 @@ export class ScoreComponent {
   }
 
   fetchScoreValue() {
-    const femmeIdString = localStorage.getItem("femmeId");
-    const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
 
-    const userId = this.authService.getUserId();
-    const u = userId==null?null:userId-1;
+    const femmeId = this.authService.getFemmeId();
 
-    console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu: ",u);
-    this.diagnosticDataService.getLastDiagnosticTest(u).subscribe(
+    this.diagnosticDataService.getLastDiagnosticTest(femmeId).subscribe(
       (response) => {
         this.scoreValue = response;
         console.log("scoreeeeeeeeeeeeeeeeee: ",response[0].reponse);

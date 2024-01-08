@@ -78,17 +78,12 @@ export class PainTrackComponent {
       }
     });
 
-    const femmeIdString = localStorage.getItem("femmeId");
-    const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
+    const femmeId = this.authService.getFemmeId();
 
-    const userId = this.authService.getUserId();
-    const u = userId==null?null:userId-1;
-
-    console.log("femmefemmefemmefemmeUser id: ",userId);
-    console.log("femmefemmefemmefemmefemme id: ",u);
+    console.log("femmefemmefemmefemmeUser id: ",femmeId);
 
     trackData['femme'] = {
-      'femmeId': u
+      'femmeId': femmeId
     };
     return trackData;
   }
