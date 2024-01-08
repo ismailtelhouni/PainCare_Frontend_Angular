@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PainTrackDataService } from 'src/app/services/api/pain-track-data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 // Define the Question type
 interface Question {
@@ -20,7 +21,8 @@ export class PainTrackComponent {
 
   constructor(
     private router: Router,
-    private painTrackDataService: PainTrackDataService
+    private painTrackDataService: PainTrackDataService,
+    private authService: AuthService
     ) {}
   navigateTo( route: string ): void {
     this.router.navigate([ route ]);
@@ -30,8 +32,10 @@ export class PainTrackComponent {
 
   questions: Question[] = [
     { text: 'Pain level?', type: 'range'},
-    { text: 'Symptoms', type: 'checkbox', choices: ['Option A', 'Option B', 'Option C'], displayChoices: false, values:[0,1,2] },
-    { text: 'What Makes Pain Worse?', type: 'checkbox', choices: ['Choice 1', 'Choice 2', 'Choice 3'], displayChoices: false, values:[0,1,2] },
+    { text: 'Pain Locations', type: 'checkbox', choices: ['Abdomen', 'Back', 'Chest', 'Head', 'Neck', 'Hips'], displayChoices: false, values:[0,1,2,3,4,5] },
+    { text: 'Symptoms', type: 'checkbox', choices: ['Cramps', 'Headache', 'Acne','Fatigue','Bloating','Craving'], displayChoices: false, values:[0,1,2,3,4,5] },
+    { text: 'What Makes Pain Worse?', type: 'checkbox', choices: ['Lack of sleep', 'Sitting', 'Standing','Stress','Walking','Exercise','Urination'], displayChoices: false, values:[0,1,2,3,4,5,6] },
+    { text: 'Feeling', type: 'checkbox', choices: ['Anxious', 'Depressed', 'Dizzy','Vomiting','Diarrhea'], displayChoices: false, values:[0,1,2,3,4] },
   ];
 
   selectedChoices: { [key: string]: any } = {};
@@ -43,12 +47,10 @@ export class PainTrackComponent {
 
   generateTrackData(selectedChoices: { [key: string]: any }): any {
     const trackData: any = {};
-
-    trackData[0] = selectedChoices[0];
   
     Object.keys(this.selectedChoices).forEach((keyG,i) => {
       if(keyG=='0'){
-        trackData[0] = selectedChoices[0];
+        trackData["painLevel"] = selectedChoices[0];
       }
       else{
         let answer:string="";
@@ -65,9 +67,29 @@ export class PainTrackComponent {
           }
           // console.log(value);
         });
-        trackData[keyG] = answer;
+        if(keyG=='1')
+        trackData['painLocations'] = answer;
+        if(keyG=='2')
+        trackData['symptoms'] = answer;
+        if(keyG=='3')
+        trackData['painWorse'] = answer;
+        if(keyG=='4')
+        trackData['fellings'] = answer;  
       }
     });
+
+    const femmeIdString = localStorage.getItem("femmeId");
+    const femmeId = femmeIdString ? parseInt(femmeIdString) : null;
+
+    const userId = this.authService.getUserId();
+    const u = userId==null?null:userId-1;
+
+    console.log("femmefemmefemmefemmeUser id: ",userId);
+    console.log("femmefemmefemmefemmefemme id: ",u);
+
+    trackData['femme'] = {
+      'femmeId': u
+    };
     return trackData;
   }
 
@@ -143,7 +165,7 @@ submitAnswers() {
         console.error('Error sending track data:', error);
       }
   );
-  
+
   this.navigateTo('dashboard');
   }
 
