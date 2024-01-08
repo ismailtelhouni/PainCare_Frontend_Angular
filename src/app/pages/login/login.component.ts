@@ -12,16 +12,21 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  image:String = "assets/img/login.jpg";
-  routePath:String = "/register"
-  constructor(private authService: AuthService,private router: Router) {}
-  navigateTo( route: string ): void {
-    this.router.navigate([ route ]);
+  image: String = "assets/img/login.jpg";
+  routePath: String = "/register"
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
   }
 
-  onSubmit(): void {
-    const isAuthenticated = this.authService.authenticate(this.email, this.password);
+  async onSubmit(): Promise<void> {
+    const isAuthenticated = await this.authService.authenticate(this.email, this.password);
 
+    console.log(isAuthenticated);
+    
     if (isAuthenticated) {
       const sessionId = this.authService.getSessionId();
       if (sessionId !== null) {

@@ -31,34 +31,34 @@ export class AuthService {
   private userId: number | null = null;
   private isAuthenticatedValue = false;
 
-  authenticate(email: string, password: string): boolean {
+  async authenticate(email: string, password: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
     this.authenticateBackend(email, password).subscribe(
       (response) => {
-        if (response.success) {
+        if (response.message=='success') {
           // Authentication successful
-          const { sessionId, userId } = response;
+          const sessionId = response.token;
+          const userId = response.id;
           this.sessionId = sessionId;
           this.userId = userId;
           this.storeSession();
           this.isAuthenticatedValue = true;
+          console.log("succes login");
+          console.log(response);
+          console.log(this.userId);
+          resolve(true);
         } else {
           // Authentication failed
           console.error('Authentication failed');
+          resolve(false);
         }
       },
       (error) => {
         console.error('Error during authentication:', error);
+        resolve(false);
       }
     );
-
-    // if (email === this.authenticatedUser.email && password === this.authenticatedUser.password) {
-    //   this.sessionId = 1;
-    //   this.storeSession();
-    //   this.isAuthenticatedValue = true;
-    //   return true;
-    // }
-    // return false;
-
+  });
     return this.isAuthenticatedValue;
   }
 
@@ -84,6 +84,13 @@ export class AuthService {
     return this.sessionId;
   }
 
+  getUserId(): number | null {
+    if (this.userId === null) {
+      this.loadId();
+    }
+    return this.userId;
+  }
+
   logout(): void {
     this.sessionId = null;
     this.userId = null;
@@ -103,6 +110,21 @@ export class AuthService {
       const parsedSession = JSON.parse(storedSession);
       if (parsedSession && parsedSession.sessionId) {
         this.sessionId = parsedSession.sessionId;
+        this.isAuthenticatedValue = true;
+      } else {
+        // If the stored session is invalid or incomplete, remove it
+        this.removeSession();
+      }
+    }
+  }
+
+
+  private loadId(): void {
+    const storedSession = localStorage.getItem(this.sessionStorageId);
+    if (storedSession) {
+      const parsedSession = JSON.parse(storedSession);
+      if (parsedSession && parsedSession.userId) {
+        this.userId = parsedSession.userId;
         this.isAuthenticatedValue = true;
       } else {
         // If the stored session is invalid or incomplete, remove it

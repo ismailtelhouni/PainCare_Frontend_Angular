@@ -1,7 +1,12 @@
 <app-header class="nav"></app-header>
 <div class="container d-flex flex-column align-items-center px-5">
     <div class="w-100 d-flex align-items-center justify-content-start px-5 py-4">
-        <input type="text" name="search" id="">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="searchIcon">
+            <button class="btn btn-outline-secondary" type="button" id="searchIcon">
+                <i class="bi bi-search"><img src="../../../assets/images/search.png" width="50" alt=""></i> <!-- Assuming you are using Bootstrap Icons -->
+            </button>
+        </div>
     </div>
     <app-list-blogs></app-list-blogs>
 </div>
