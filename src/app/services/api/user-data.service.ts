@@ -35,7 +35,7 @@ export class UserDataService {
         localStorage.setItem('authSession', JSON.stringify({ sessionId }));
         localStorage.setItem('userIdSession', JSON.stringify({ userId }));
         localStorage.setItem('loginSession', 'true');
-        
+
       })
     );
   }
@@ -43,6 +43,14 @@ export class UserDataService {
   getFemmeById(femmeId: any): Observable<any> {
 
     const apiUrl = `${this.backendHost}/femmes/id/${femmeId}`;
-    return this.http.get<any>(apiUrl);
+
+    const token = this.auth.getSessionId();  // Replace 'yourAuthTokenKey' with the key you use to store the token
+
+    const options = {
+      headers: {
+          'Authorization': 'Bearer ' + token,  // Adjust based on your token mechanism
+          },
+      };
+    return this.http.get<any>(apiUrl,options);
   }
 }
