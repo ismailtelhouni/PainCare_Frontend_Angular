@@ -3,7 +3,7 @@
     padding: 16px;
     /* margin: 16px; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* background-color: #dedede; */
+    background-color: #ffe7e3;
     /* background-image: url('../../../assets/images/gray.jpg'); */
     /* background-size: cover; */
     /* background-position: center; */
@@ -14,7 +14,7 @@
     background-color: #ffffff;
 } */
 .article-text{
-    background-color: #e2e0e0;
+    background-color: #ffe7e3;
     color: #5f5e5e;
 }
 .article-title{
