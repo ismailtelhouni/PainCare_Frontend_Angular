@@ -38,7 +38,7 @@ export class UserDataService {
         localStorage.setItem('userIdSession', JSON.stringify({ userId }));
         localStorage.setItem('femmeIdSession', JSON.stringify({ femmeId }));
         localStorage.setItem('loginSession', 'true');
-        
+
       })
     );
   }
