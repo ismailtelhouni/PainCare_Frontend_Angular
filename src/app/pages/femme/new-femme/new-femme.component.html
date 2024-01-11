@@ -4,8 +4,9 @@
         <!-- <li class="breadcrumb-item active" aria-current="page">Create User</li> -->
       </ol>
     </nav>
-    <div class="page-content">
-      <div class="row">
+    <div class="page-content py-4 card d-flex flex-column align-items-center" style="background-color: #ffe7e3;">
+      <h1 class="signup-t">{{"S'incrire"|translate}}</h1>
+      <div class="row w-100">
         <div class="col col-md-4">
           <img class="img-avatar" src="{{avatarLink}}">
           <button mat-stroked-button class="change-img-button" color="primary" (click)="openDialog()">Change Image</button>
@@ -63,7 +64,7 @@
             <div class="row submit-button-container">
               <div class="col-md-4 d-flex flex-column gap-2">
                 <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!exampleForm.valid">Create</button>
-                <span> {{'Vous avez un compte'|translate}} <a routerLink='/register' (click)="navigateTo('login')" class="cp fc-primary"  > {{'LOGIN'|translate}} </a> </span>
+                <span> {{'Vous avez un compte'|translate}} <a routerLink='/register' (click)="navigateTo('login')" class="cp" style="color: #FF8B9E;" > {{'LOGIN'|translate}} </a> </span>
               </div>
             </div>
   

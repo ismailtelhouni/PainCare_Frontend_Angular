@@ -22,6 +22,11 @@
         display: block;
         margin: 0px auto;
       }
+
+      // .form-control{
+      //   background-color: #FFF;
+      //   padding: 20px;
+      // }
   
       .create-form {
         padding: 20px;
@@ -44,4 +49,8 @@
         }
       }
     }
+  }
+
+  .signup-t{
+    text-transform: uppercase;
   }

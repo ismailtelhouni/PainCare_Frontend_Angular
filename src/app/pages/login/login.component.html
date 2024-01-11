@@ -1,29 +1,33 @@
 <!-- <app-container-form [imagetest]="image"> -->
-    <div class="container w-100 d-flex justify-content-center">
-        <div class="d-flex h-h-400 align-items-center justify-content-start w-50">
-            <form action="" method="post" (ngSubmit)="onSubmit()">
+    <div class="container w-100 d-flex flex-column justify-content-end align-items-center">
+      <div class="card mt-4 p-4 py-5 d-flex align-items-center justify-content-center w-80 gap-4" style="background-color: #ffe7e3;">
+        <h1 class="login-t">{{'LOGIN' | translate}}</h1>
+        <div class="row d-flex align-items-start justify-content-center w-100">
+          <img class="col-md-6" src="../../../assets/images/back3.PNG" alt="" />
+            <form action="" method="post" (ngSubmit)="onSubmit()" class="col-md-6 h-h-400 d-flex flex-column justify-content-center">
                 <div class="w-100 d-flex flex-column align-items-start gap-0">
-                  <div class="sm:col-span-4 mb-4">
+                  <div class="sm:col-span-4 mb-4 w-100">
                     <div>
-                        <input [(ngModel)]="email" id="email" name="email" type="email" autocomplete="email" class="form-control border-bottom-input" placeholder="Exemple@gmail.com">
+                        <input [(ngModel)]="email" id="email" name="email" type="email" autocomplete="email" class="form-control border-bottom-input w-100" placeholder="Exemple@gmail.com">
                     </div>
                   </div>
           
-                  <div>
+                  <div class="sm:col-span-4 mb-4 w-100">
                     <div>
-                        <input [(ngModel)]="password" id="password" name="password" type="password" autocomplete="password" class="form-control border-bottom-input" placeholder="Password">
+                        <input [(ngModel)]="password" id="password" name="password" type="password" autocomplete="password" class="form-control border-bottom-input w-100" placeholder="Password">
                     </div>
                   </div>
                   <div class="flex flex-row mt-4">
           
-                    <button type="submit" class="btn h-bg-primary"> {{"LOGIN"|translate}} </button>
+                    <button type="submit" class="mb-3 login-btn h-bg-primary"> {{"LOGIN"|translate}} </button><br/>
           
-                    <span> {{"Vous n'avez pas un compte"|translate}} <a routerLink='/register' (click)="navigateTo('newuser')" class="cp fc-primary"  > {{"S'incrire"|translate}} </a> </span>
+                    <span> {{"Vous n'avez pas un compte"|translate}} <a routerLink='/register' (click)="navigateTo('newuser')" class="cp" style="color: #FF8B9E;"> {{"S'incrire"|translate}} </a> </span>
           
                   </div>
           
                 </div>
             </form>
-        </div>
+            </div>
+      </div>
     </div>
   <!-- </app-container-form> -->

@@ -9,3 +9,19 @@
     border-bottom-color: #007bff; /* Customize the border color on focus */
     box-shadow: none; /* Remove the default focus box shadow */
   }
+
+
+  .login-btn{
+    color: rgb(255, 255, 255) !important;
+    background-color: #FF8B9E !important;
+    padding: 1%;
+    padding-left: 10%;
+    padding-right: 10%;
+    border: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.login-t{
+  text-transform: uppercase;
+}
