@@ -12,21 +12,21 @@ export class PainDataService {
     private backendConfigService: BackendConfigService
     ) {}
 
-  getPainData(sessionId: number, userId: any): Observable<any[]> {
+  // getPainData(sessionId: number, userId: any): Observable<any[]> {
 
-    const backendHost = this.backendConfigService.getBackendHost();
-    const apiUrl = `${backendHost}/diagnostics/byfemme/${userId}`;
+  //   const backendHost = this.backendConfigService.getBackendHost();
+  //   const apiUrl = `${backendHost}/diagnostics/byfemme/${userId}`;
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'token': sessionId,
-      'User-ID': userId,
-    });
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'token': sessionId,
+  //     'User-ID': userId,
+  //   });
 
-    const options = { headers };
-    
-    return this.http.get<any[]>(apiUrl,options);
-  }
+  //   const options = { headers };
+
+  //   return this.http.get<any[]>(apiUrl,options);
+  // }
 
   getPainLevelData(sessionId: any, userId: any): Observable<any[]> {
 
@@ -40,7 +40,7 @@ export class PainDataService {
           'User-ID': userId.toString(),
           },
       };
-    
+
     return this.http.get<any[]>(apiUrl,options);
   }
 
@@ -56,7 +56,7 @@ export class PainDataService {
         'User-ID': userId.toString(),
       },
     };
-    
+
     return this.http.get<any[]>(apiUrl,options);
   }
 }

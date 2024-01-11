@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ContainerFormComponent } from './container-form/container-form.component';
+import { BlogCardSecondaireComponent } from './blog-card-secondaire/blog-card-secondaire.component';
 import { FooterComponent } from './footer/footer.component';
 
 
@@ -32,6 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListBlogsComponent,
     ScoreComponent,
     FemmeActionsComponent,
+    ContainerFormComponent,
+    BlogCardSecondaireComponent,
     FooterComponent
   ],
   imports: [
@@ -53,6 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListBlogsComponent,
     ScoreComponent,
     FemmeActionsComponent,
+    ContainerFormComponent,
+    BlogCardSecondaireComponent,
     FooterComponent
   ]
 })

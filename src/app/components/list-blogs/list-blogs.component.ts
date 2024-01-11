@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Blog } from 'src/app/models/blog.model';
 import { BlogDataService } from 'src/app/services/api/blog-data.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { BlogDataService } from 'src/app/services/api/blog-data.service';
   styleUrls: ['./list-blogs.component.css']
 })
 export class ListBlogsComponent {
+
+  @Input() blogs : Blog[]= [] ;
+
   constructor(
     private router: Router,
     private blogDataService: BlogDataService
@@ -15,16 +19,6 @@ export class ListBlogsComponent {
   navigateTo( route: Number ): void {
     this.router.navigate(['blog'], { queryParams: { id: route } });
   }
-
-  blogs = [
-    { id: 1, title: 'first' },
-    { id: 2, title: 'test 2' },
-    { id: 3, title: 'blog 3' },
-    { id: 4, title: 'blog 4' },
-    { id: 5, title: 'blog 5' },
-  ];
-
-  // blogs: any[] = [];
 
   // ngOnInit(): void {
   //   this.loadBlogs();

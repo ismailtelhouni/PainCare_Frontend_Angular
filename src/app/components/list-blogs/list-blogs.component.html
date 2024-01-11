@@ -1,7 +1,15 @@
 <div class="row px-5">
     <div class="col-md-4" *ngFor="let blog of blogs; let i = index">
-        <a (click)="navigateTo(blog.id)">
-            <app-blog-card [i]="i"  [title]="blog.title"></app-blog-card>
+        <a (click)="navigateTo(blog.blogId)">
+            <app-blog-card
+              [i]="i"
+              [title]="blog.titre"
+              [description]="blog.description"
+              [image]="blog.image"
+              [nbrCommantaire]="blog.nbrCommantaire"
+              [id]="blog.blogId"
+              [blog_date]="blog.blogDate"
+              ></app-blog-card>
         </a>
     </div>
 </div>

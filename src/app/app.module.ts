@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     CanvasJSAngularChartsModule
