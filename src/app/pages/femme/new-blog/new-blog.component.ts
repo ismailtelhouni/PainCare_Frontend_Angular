@@ -60,7 +60,7 @@ export class NewBlogComponent {
         console.log(response);
 
         this.toastr.success("Success","Success! The addition of the blog has been completed.")
-        this.navigation.navigateTo("/my-blog")
+        this.navigation.navigateTo("/dashboard")
         // Traitez la réponse du backend ici
       }, error => {
         console.error(error);
