@@ -1,9 +1,4 @@
 <div class="edit-page">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Edit User</li>
-      </ol>
-    </nav>
     <div class="page-content">
       <div class="row">
         <div class="col col-md-4">
@@ -12,37 +7,32 @@
         </div>
         <div class="col col-md-8">
   
-          <form class="edit-form" [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)">
+          <form *ngIf="item && exampleForm" class="edit-form" [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)">
 
 
-            <div class="form-group">
-                <mat-form-field class="input-style">
-                  <input matInput placeholder="Email" class="form-control" formControlName="email" type="email" value="{{item.email}}">
-                </mat-form-field>
-                <ng-container *ngFor="let validation of validation_messages.email">
-                  <mat-error *ngIf="exampleForm.get('email')?.hasError(validation.type) && (exampleForm.get('email')?.dirty || exampleForm.get('email')?.touched)">
-                      {{validation.message}}
-                  </mat-error>
-                </ng-container>
-              </div>
-  
-            <div class="form-group">
-              <mat-form-field class="input-style">
-                <input matInput placeholder="Name" class="form-control" formControlName="name" value="{{item.name}}">
-              </mat-form-field>
-              <ng-container *ngFor="let validation of validation_messages.name">
-                <mat-error *ngIf="exampleForm.get('name')?.hasError(validation.type) && (exampleForm.get('name')?.dirty || exampleForm.get('name')?.touched)">{{validation.message}}</mat-error>
-              </ng-container>
-            </div>
-  
-            <div class="form-group">
-              <mat-form-field class="input-style">
-                <input matInput placeholder="Surname" class="form-control" formControlName="surname" value="{{item.surname}}">
-              </mat-form-field>
-              <ng-container *ngFor="let validation of validation_messages.surname">
-                <mat-error *ngIf="exampleForm.get('surname')?.hasError(validation.type) && (exampleForm.get('surname')?.dirty || exampleForm.get('surname')?.touched)">{{validation.message}}</mat-error>
-              </ng-container>
-            </div>
+            <!-- Email input -->
+            <mat-form-field class="input-style">
+              <label for="email">Email</label>
+              <input matInput placeholder="Email" class="form-control" formControlName="email" type="email" [(ngModel)]="item.email" value="{{item.email}}">
+            </mat-form-field>
+
+            <!-- Name input -->
+            <mat-form-field class="input-style">
+              <label for="name">Name</label>
+              <input matInput placeholder="Name" class="form-control" formControlName="name" [(ngModel)]="item.name" value="{{item.name}}">
+            </mat-form-field>
+
+            <!-- Surname input -->
+            <mat-form-field class="input-style">
+              <label for="surname">Surname</label>
+              <input matInput placeholder="Surname" class="form-control" formControlName="surname" [(ngModel)]="item.surname" value="{{item.surname}}">
+            </mat-form-field>
+
+            <!-- Ville input -->
+            <mat-form-field class="input-style">
+              <label for="ville">Ville</label>
+              <input matInput placeholder="Ville" class="form-control" formControlName="ville" [(ngModel)]="item.ville" value="{{item.ville}}">
+            </mat-form-field>
   
             <div class="row submit-button-container">
               <div class="col-md-4">

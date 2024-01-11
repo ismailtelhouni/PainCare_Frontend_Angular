@@ -56,4 +56,16 @@ export class UserDataService {
       };
     return this.http.get<any>(apiUrl,options);
   }
+
+  updateFemmeProfile(femmeId: number|null, formData: any): Observable<any> {
+    const apiUrl = `${this.backendHost}/femmes/id/${femmeId}`;
+
+    const token = this.auth.getSessionId();
+    const options = {
+      headers: {
+          'Authorization': 'Bearer ' + token,  // Adjust based on your token mechanism
+          },
+      };
+    return this.http.put(apiUrl, formData, options);
+  }
 }
