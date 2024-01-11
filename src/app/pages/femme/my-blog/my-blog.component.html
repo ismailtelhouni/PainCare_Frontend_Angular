@@ -1,0 +1,25 @@
+<div class="backg">
+  <app-header class="nav"></app-header>
+  <div>petit</div>
+
+  <div class="container py-5 my-5">
+    <div class="row">
+      <div class="d-flex flex-row-reverse px-5 py-3">
+        <button type="button" (click)="navigateTo('/new-blog')" class="btn btn-danger btn-round">Publish Blog</button>
+      </div>
+    </div>
+    <div class="cards-secondaire pb-5 mb-5" *ngFor="let blog of blogsHoriz">
+      <app-blog-card-secondaire
+        [blog_date]="blog.blogDate"
+        [title]="blog.titre"
+        [description]="blog.description"
+        [image]="blog.image"
+        [nbrCommantaire]="blog.nbrCommantaire"
+        [id]="blog.blogId"
+      ></app-blog-card-secondaire>
+    </div>
+
+    <app-list-blogs [blogs]="blogs" ></app-list-blogs>
+  </div>
+
+</div>

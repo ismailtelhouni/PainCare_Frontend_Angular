@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { LeftLandingComponent } from './home/components/left-landing/left-landing.component';
 import { RightLandingComponent } from './home/components/right-landing/right-landing.component';
@@ -21,6 +21,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NewBlogComponent } from './femme/new-blog/new-blog.component';
+import { MyBlogComponent } from './femme/my-blog/my-blog.component';
 
 
 
@@ -43,6 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         DiagnosticTestComponent,
         NewFemmeComponent,
         AvatarDialogComponent,
+        NewBlogComponent,
+        MyBlogComponent,
     ],
     imports: [
         CommonModule,
@@ -59,11 +63,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatFormFieldModule,
         MatDialogModule,
         MatInputModule,
-        MatButtonModule
-        
+        MatButtonModule,
+
     ],
     providers: [
         { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }, // Optional: You can customize options
+        DatePipe
       ],
 })
 export class PagesModule { }
