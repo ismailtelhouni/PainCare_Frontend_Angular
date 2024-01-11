@@ -9,6 +9,7 @@ import { PainTrackComponent } from './pages/femme/pain-track/pain-track.componen
 import { LoginComponent } from './pages/login/login.component';
 import { DiagnosticTestComponent } from './pages/femme/diagnostic-test/diagnostic-test.component';
 import { NewFemmeComponent } from './pages/femme/new-femme/new-femme.component';
+import { ProfilComponent } from './pages/femme/profil/profil.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,9 @@ const routes: Routes = [
   },{
     path:"newuser",
     component:NewFemmeComponent
+  },{
+    path:"profil",
+    component:ProfilComponent
   }
 ];
 

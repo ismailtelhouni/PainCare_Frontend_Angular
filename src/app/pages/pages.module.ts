@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ProfilComponent } from './femme/profil/profil.component';
 
 
 
@@ -43,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DiagnosticTestComponent,
         NewFemmeComponent,
         AvatarDialogComponent,
+        ProfilComponent,
     ],
     imports: [
         CommonModule,

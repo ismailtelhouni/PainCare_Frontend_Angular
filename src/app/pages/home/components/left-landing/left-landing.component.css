@@ -3,26 +3,43 @@
 }
 
 .quote{
-    font-family:Signika, Gill 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Sans Mono, monospace, "Trebuchet MS", Helvetica, sans-serif; /* Replace 'Arial' with your desired font */
+    font-family:Libre Baskerville,Lato, sans-serif, Gill 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Sans Mono, monospace, "Trebuchet MS", Helvetica, sans-serif !important; /* Replace 'Arial' with your desired font */
     text-align: left;
-    color: #ffffff; /* Set your desired text color */
+    color: #383737; /* Set your desired text color */
     margin: 0;
     padding: 20px; /* Adjust the padding as needed */
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 30px;
+    /* text-transform: uppercase; */
+    /* font-weight: 600; */
+    font-size: 26px;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); */
+
 }
 .in-quote{
-    color: #F8C137;
+    font-family:Libre Baskerville,Lato, sans-serif, Gill 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Sans Mono, monospace, "Trebuchet MS", Helvetica, sans-serif !important; /* Replace 'Arial' with your desired font */
+    /* color: #F7C501; */
+    /* text-transform: uppercase; */
+    font-weight:bolder;
+    font-size: 34px;
+    /* text-shadow: 0px 0px 4px rgb(92, 91, 91); */
+    /* text-decoration: underline; */
+    /* border-bottom: 2px solid #edf1af; */
+    text-transform: uppercase;
 }
 
 .try-btn{
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255) !important;
+    background-color: #FF8B9E !important;
     padding: 1%;
     padding-left: 10%;
     padding-right: 10%;
     border: 0;
     font-size: 18px;
     font-weight: 600;
+}
+
+h3{
+    font-family:Libre Baskerville, Libre;
+    font-weight: 400 !important;
+    font-size: 39.5px !important;
+    line-height: 50.3px !important;
 }

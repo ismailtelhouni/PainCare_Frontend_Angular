@@ -1,5 +1,5 @@
-.nav{
-    background-color: rgb(128, 191, 218);
+.bd{
+    height: auto;
 }
 
 .card{
@@ -14,4 +14,9 @@
 
 .canvas{
     width: 100% !important;
+}
+
+.profil-img{
+    border-radius: 50%;
+    width: 100px;
 }
