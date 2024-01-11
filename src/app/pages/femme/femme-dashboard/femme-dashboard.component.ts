@@ -19,6 +19,9 @@ export class FemmeDashboardComponent {
   painLevels: number[] = [];
   painLocations: any[] = [];
   Symptoms: any[] = [];
+  Feelings: any[] = [];
+  PainWorses: any[] = [];
+  
   painLevelsAvg = 0;
 
 
@@ -37,20 +40,21 @@ export class FemmeDashboardComponent {
   }
 
   userSurname = '';
-  userName='';
+  userName = '';
+  userProfil = '';
   title = 'chartDemo';
 
 
 
   ngOnInit() {
 
-    console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",localStorage.getItem("userIdSession"));
+    console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", localStorage.getItem("userIdSession"));
     this.userId = this.authService.getUserId();
     this.sessionId = this.authService.getSessionId();
     this.femmeId = this.authService.getFemmeId();
 
-    console.log("token",this.sessionId)
-    console.log("femmmmmmmmmmmmmmmmmmme id ; ",this.femmeId);
+    console.log("token", this.sessionId)
+    console.log("femmmmmmmmmmmmmmmmmmme id ; ", this.femmeId);
     if (this.sessionId === null) {
       this.router.navigate(['/login']);
     }
@@ -66,16 +70,17 @@ export class FemmeDashboardComponent {
           // Handle the case when the array is empty to avoid division by zero
           this.painLevelsAvg = 0;
         }
-        console.log("good",response);
+        console.log("good", response);
         this.painLocations = response.map((item) => parseInt(item.painLevel));
         this.updateChartTitle(this.painLevels);
 
         // this.femmeId = response[0]?.femme?.femmeId;
         // localStorage.setItem("femmeId",JSON.stringify(this.femmeId));
         // console.log("femmeeeeeeeeeeeeeeee",this.femmeId);
-
+//---------------------------------------------------------------------------------------------------------
         // Assuming your response is stored in the variable 'response'
-        const painLocationsArray = response.map((item) => item.painLocations.split(',').map(Number)).flat();
+        const painLocationsArray = response.filter(item => item.painLocations.trim() !== '')  // Filter out items with empty painLocations
+                                          .map((item) => item.painLocations.split(',').map(Number)).flat();
 
         // Mapping of pain location types
         const locationTypes = ['Abdomen', 'Back', 'Chest', 'Head', 'Neck', 'Hips'];
@@ -92,12 +97,13 @@ export class FemmeDashboardComponent {
 
         this.updateChartTitleLocations(this.painLocations);
 
-
+//---------------------------------------------------------------------------------------------------------
         // Assuming your response is stored in the variable 'response'
-        const painSymptomsArray = response.map((item) => item.symptoms.split(',').map(Number)).flat(); 
+        const painSymptomsArray = response.filter(item => item.symptoms.trim() !== '')
+                                          .map((item) => item.symptoms.split(',').map(Number)).flat();
 
         // Mapping of pain location types
-        const SymptomsTypes = ['Cramps', 'Headache', 'Acne','Fatigue','Bloating','Craving'];
+        const SymptomsTypes = ['Cramps', 'Headache', 'Acne', 'Fatigue', 'Bloating', 'Craving'];
 
         // Count the occurrences of each pain location
         const countBySymptoms = painSymptomsArray.reduce((acc, value) => {
@@ -110,6 +116,47 @@ export class FemmeDashboardComponent {
         this.Symptoms = Object.entries(countBySymptoms).map(([type, count]) => ({ type, count }));
 
         this.updateChartTitleSymptoms(this.Symptoms);
+
+//---------------------------------------------------------------------------------------------------------
+        // Assuming your response is stored in the variable 'response'
+        const PainWorsesArray = response.filter(item => item.painWorse.trim() !== '')
+                                          .map((item) => item.painWorse.split(',').map(Number)).flat();
+
+        // Mapping of pain location types
+        const PainWorsesTypes = ['Lack of sleep', 'Sitting', 'Standing','Stress','Walking','Exercise','Urination'];
+
+        // Count the occurrences of each pain location
+        const countByPainWorses = PainWorsesArray.reduce((acc, value) => {
+          const type = PainWorsesTypes[value];
+          acc[type] = (acc[type] || 0) + 1;
+          return acc;
+        }, {});
+
+        // Convert the countByPainLocation object into an array
+        this.PainWorses = Object.entries(countByPainWorses).map(([type, count]) => ({ type, count }));
+
+        this.updateChartTitlePainWorses(this.PainWorses);
+
+//---------------------------------------------------------------------------------------------------------
+        // Assuming your response is stored in the variable 'response'
+        const painFeelingsArray = response.filter(item => item.fellings.trim() !== '')
+                                          .map((item) => item.fellings.split(',').map(Number)).flat();
+
+        // Mapping of pain location types
+        const FeelingsTypes = ['Anxious', 'Depressed', 'Dizzy','Vomiting','Diarrhea'];
+
+        // Count the occurrences of each pain location
+        const countByFeelings = painFeelingsArray.reduce((acc, value) => {
+          const type = FeelingsTypes[value];
+          acc[type] = (acc[type] || 0) + 1;
+          return acc;
+        }, {});
+
+        // Convert the countByPainLocation object into an array
+        this.Feelings = Object.entries(countByFeelings).map(([type, count]) => ({ type, count }));
+
+        this.updateChartTitleFeeling(this.Feelings);
+
       },
       (error) => {
         console.error('Error fetching pain levels:', error);
@@ -119,6 +166,9 @@ export class FemmeDashboardComponent {
     Chart.register(...registerables);
     this.updateChartTitle(this.painLevels);
     this.updateChartTitleLocations(this.painLocations);
+    this.updateChartTitleSymptoms(this.Symptoms);
+    this.updateChartTitlePainWorses(this.PainWorses);
+    this.updateChartTitleFeeling(this.Feelings);
 
 
     // // Fetch pain locations from the backend
@@ -134,9 +184,11 @@ export class FemmeDashboardComponent {
 
     this.translateService.onLangChange.subscribe(() => {
       console.log('Language changed');
-      this.updateChartTitle(this.painLevels); 
+      this.updateChartTitle(this.painLevels);
       this.updateChartTitleLocations(this.painLocations);
       this.updateChartTitleSymptoms(this.Symptoms);
+      this.updateChartTitlePainWorses(this.PainWorses);
+      this.updateChartTitleFeeling(this.Feelings);
     });
 
 
@@ -149,9 +201,10 @@ export class FemmeDashboardComponent {
 
     this.userDataService.getFemmeById(this.femmeId).subscribe(
       (response) => {
-        console.log("femeeeNaaaaaaaaaaaaaaaaaaammmmmmmmmmmeeeeeeeeeee",response)
+        console.log("femeeeNaaaaaaaaaaaaaaaaaaammmmmmmmmmmeeeeeeeeeee", response)
         this.userSurname = response.prenom;
         this.userName = response.nom;
+        this.userProfil = response.profil;
       },
       (error) => {
         console.error('Error fetching pain levels:', error);
@@ -160,7 +213,7 @@ export class FemmeDashboardComponent {
     console.log()
   }
 
-  
+
 
 
 
@@ -295,7 +348,7 @@ export class FemmeDashboardComponent {
 
   updateChartTitleSymptoms(Symptoms: any): void {
 
-    console.log("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",Symptoms);
+    console.log("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", Symptoms);
     const existingChart = Chart.getChart("myChartPieSymptoms");
     // this.destroyChart(existingChart);
     if (existingChart) {
@@ -308,7 +361,8 @@ export class FemmeDashboardComponent {
         datasets: [{
           label: 'Symptoms',
           data: Symptoms.map((symptom: any) => symptom.count),
-          backgroundColor: ["#F0F9E6", "#FDE9F2", "#FBFBEF", "#5733FF", "#FF3366", "#66FF33", "#FFD700", "#7B68EE", "#00FA9A", "#8A2BE2"],
+          backgroundColor: ['#e74c3c', "#FF3366", "#66FF33", "#FFD700", '#d98880',
+          '#95a5a6', '#dcdde1', '#34495e', '#bdc3c7', '#7f8c8d'],
           borderColor: "#0196FD",
           borderWidth: 0,
           // tension: 0.3
@@ -341,6 +395,138 @@ export class FemmeDashboardComponent {
             formatter: (value: any, context: any) => {
               // Display the type label on each pie slice
               return Symptoms[context.dataIndex].type;
+            },
+          },
+        }
+      }
+    });
+
+    const translatedTitle = this.translateService.instant('chartTitle');
+    console.log('Translated Title:', translatedTitle);
+    // chart.options.plugins.title.text = translatedTitle;
+    chart.update();
+
+    // Manually trigger change detection
+    this.cdr.detectChanges();
+  }
+
+
+
+  updateChartTitleFeeling(Feelings: any): void {
+
+    console.log("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", Feelings);
+    const existingChart = Chart.getChart("myChartPieFeelings");
+    // this.destroyChart(existingChart);
+    if (existingChart) {
+      existingChart.destroy(); // Destroy the existing chart
+    }
+    const chart = new Chart("myChartPieFeelings", {
+      type: 'pie',
+      data: {
+        labels: Feelings.map((Feeling: any) => Feeling.type),
+        datasets: [{
+          label: 'Feelings',
+          data: Feelings.map((Feeling: any) => Feeling.count),
+          backgroundColor: ['#9b59b6', '#aec7e8', '#3498db', "#66FF33", '#FFD700',
+          '#e67e22', '#f5cba7', '#d35400', '#f39c12', '#e74c3c'],
+          borderColor: "#0196FD",
+          borderWidth: 0,
+          // tension: 0.3
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10  // Set the maximum value of the y-axis to 10
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: this.translateService.instant('Feeling'),
+            font: {
+              size: 16
+            }
+          },
+          legend: {
+            position: 'bottom', // Set this to false to hide the legend
+          },
+          datalabels: {
+            display: 'initial',
+            anchor: 'end',
+            align: 'start',
+            offset: 4,
+            color: 'white',
+            formatter: (value: any, context: any) => {
+              // Display the type label on each pie slice
+              return Feelings[context.dataIndex].type;
+            },
+          },
+        }
+      }
+    });
+
+    const translatedTitle = this.translateService.instant('chartTitle');
+    console.log('Translated Title:', translatedTitle);
+    // chart.options.plugins.title.text = translatedTitle;
+    chart.update();
+
+    // Manually trigger change detection
+    this.cdr.detectChanges();
+  }
+
+
+
+  updateChartTitlePainWorses(PainWorses: any): void {
+
+    console.log("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", PainWorses);
+    const existingChart = Chart.getChart("myChartPiePainWorses");
+    // this.destroyChart(existingChart);
+    if (existingChart) {
+      existingChart.destroy(); // Destroy the existing chart
+    }
+    const chart = new Chart("myChartPiePainWorses", {
+      type: 'pie',
+      data: {
+        labels: PainWorses.map((PainWorse: any) => PainWorse.type),
+        datasets: [{
+          label: 'PainWorses',
+          data: PainWorses.map((PainWorse: any) => PainWorse.count),
+          backgroundColor: ['#1f77b4','#d2b4de', "#FF3366", '#85c1e9','#2980b9',
+          '#2ecc71', '#a9dfbf', "#FF3366", "#66FF33", "#FFD700"],
+          borderColor: "#0196FD",
+          borderWidth: 0,
+          // tension: 0.3
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10  // Set the maximum value of the y-axis to 10
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: this.translateService.instant('PainWorses'),
+            font: {
+              size: 16
+            }
+          },
+          legend: {
+            position: 'bottom', // Set this to false to hide the legend
+          },
+          datalabels: {
+            display: 'initial',
+            anchor: 'end',
+            align: 'start',
+            offset: 4,
+            color: 'white',
+            formatter: (value: any, context: any) => {
+              // Display the type label on each pie slice
+              return PainWorses[context.dataIndex].type;
             },
           },
         }

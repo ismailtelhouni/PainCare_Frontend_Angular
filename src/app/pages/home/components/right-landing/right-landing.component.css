@@ -1,4 +1,11 @@
 .right-image{
     position: absolute;
     height: 95%;
+    user-select: none !important;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    transition: ease 2s;
+    width: auto; /* Maintain aspect ratio */
 }

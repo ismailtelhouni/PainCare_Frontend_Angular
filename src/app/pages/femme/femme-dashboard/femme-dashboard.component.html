@@ -1,36 +1,42 @@
-<app-header class="nav"></app-header>
-<div class="w-100 d-flex flex-column align-items-center justify-content-center">
-    <div class="container w-100 py-4 row gap-4">
-        <div class="col-md-12 d-flex flex-column gap-3">
-            <h3>{{"Hi"|translate}}  {{userName}} {{userSurname}}</h3>
-            <div class="row">
+<body class="bd">
+    <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+        <div class="container w-100 py-4 row gap-4">
+            <div class="col-md-12 d-flex flex-column gap-3">
+                <h3 class="d-flex gap-3 align-items-center"><img src="{{userProfil}}" class="profil-img" alt=""> <!--{{"Hi"|translate}}-->  {{userName}} {{userSurname}}</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <app-score></app-score>
+                    </div>
+                    <div class="col-md-6 m-0 p-0">
+                        <app-femme-actions></app-femme-actions>
+                    </div>
+                </div>
+            </div>
+            <!-- <canvas options="chartOptions" styles="{width: '100%', height:'360px'}"></canvas> -->
+            <div class="row w-100 d-flex justify-content-between p-0">
                 <div class="col-md-6">
-                    <app-score></app-score>
-                </div>
-                <div class="col-md-6 m-0 p-0">
-                    <app-femme-actions></app-femme-actions>
-                </div>
-            </div>
-        </div>
-        <!-- <canvas options="chartOptions" styles="{width: '100%', height:'360px'}"></canvas> -->
-        <div class="row w-100 d-flex justify-content-between p-0">
-            <div class="col-md-6">
-                <div class="card w-100">
-                    <div class="card-body">
-                        <canvas id="myChart" class="w-100 h-100 canvas"></canvas>
-                    </div>
-                    </div>   
-            </div>  
-            <div class="col-md-6 pr-0 h-h-250">
-                <div class="card pr-0 w-100">
-                    <div class="card-body">
-                        <div class="h-h-250 d-flex justify-content-between">
-                            <canvas id="myChartPie"></canvas>
-                            <canvas id="myChartPieSymptoms"></canvas>
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <canvas id="myChart" class="w-100 h-100 canvas"></canvas>
                         </div>
-                    </div>
-                </div>    
+                        </div>   
+                </div>  
+                <div class="col-md-6 pr-0">
+                    <div class="card pr-0 w-100">
+                        <div class="card-body">
+                            <div class="h-h-250 d-flex justify-content-between">
+                                <canvas id="myChartPie"></canvas>
+                                <canvas id="myChartPieSymptoms"></canvas>
+                                <!-- <canvas id="myChartPieSymptoms"></canvas> -->
+                            </div>
+                            <div class="h-h-250 d-flex justify-content-between">
+                                <canvas id="myChartPieFeelings"></canvas>
+                                <canvas id="myChartPiePainWorses"></canvas>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
             </div>
-        </div>
-    </div>    
-</div>
+        </div>    
+    </div>   
+</body>

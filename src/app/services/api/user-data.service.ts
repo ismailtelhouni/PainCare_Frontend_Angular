@@ -23,7 +23,9 @@ export class UserDataService {
         // Assuming that the response has 'sessionId' and 'userId' properties
         // const { sessionId, userId } = response;
         const sessionId = response.token;
-        const userId = response.id;
+        const userId = response.userId;
+        const femmeId = response.femmeId;
+
 
         console.log("user createeed", userId," session", sessionId)
 
@@ -34,6 +36,7 @@ export class UserDataService {
 
         localStorage.setItem('authSession', JSON.stringify({ sessionId }));
         localStorage.setItem('userIdSession', JSON.stringify({ userId }));
+        localStorage.setItem('femmeIdSession', JSON.stringify({ femmeId }));
         localStorage.setItem('loginSession', 'true');
         
       })
