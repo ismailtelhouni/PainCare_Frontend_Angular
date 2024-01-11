@@ -16,6 +16,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 // import { ChartsModule } from 'ng2-charts';
 
 // AoT requires an export function for factories
@@ -37,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CanvasJSAngularChartsModule,
     HttpClientModule,
     FormsModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

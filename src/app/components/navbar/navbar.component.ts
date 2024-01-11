@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,15 +11,32 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router, private authService: AuthService, public translate: TranslateService) {
+  constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    public translate: TranslateService,
+    private cdr: ChangeDetectorRef,
+    ) {
     translate.setDefaultLang('en'); // Default language
     this.selectedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // Retrieve the selected language from localStorage
     translate.use(this.selectedLanguage); // Use the stored language
+
   }
-  navigateTo( route: string ): void {
-    this.router.navigate([ route ]);
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
   }
 
+  confirmLogout() {
+    const confirmation = window.confirm('Are you sure you want to logout?');
+
+    if (confirmation) {
+      this.logout();
+    } else {
+      this.navigateTo("logout");
+      // User clicked "Cancel" or closed the dialog
+      // You can add additional logic if needed
+    }
+  }
   selectedLanguage: any = 'en'; // Default language
 
   onLanguageChange(event: Event) {
@@ -60,15 +77,16 @@ export class NavbarComponent {
   }
 
   getModifiedNavItems(): any[] {
-    const isAuthenticated = this.authService.isAuthenticated();
+    const isAuthenticated:boolean = this.authService.isAuthenticated();
 
     // Create a copy of the original navItems array
     const modifiedNavItems = [...this.originalNavItems];
-    
+
     // Find the "Login" item and update its label based on the session status
-    const loginItemIndex = modifiedNavItems.findIndex(item => item.label === 'Login');
+    const loginItemIndex = modifiedNavItems.findIndex(item => item.label === 'Login'|| item.label === 'Logout');
     if (loginItemIndex !== -1) {
       modifiedNavItems[loginItemIndex].label = isAuthenticated ? 'Logout' : 'Login';
+      // console.log("is authentified: ", isAuthenticated);
     }
 
     // const dashboardItemIndex = modifiedNavItems.findIndex(item => item.label === 'Dashboard');
@@ -84,11 +102,13 @@ export class NavbarComponent {
   get navItems(): any[] {
     return this.getModifiedNavItems();
   }
+  
 
   // Logout function
   logout(): void {
     this.authService.logout();
     this.navigateTo('/login'); // Redirect to the login page or any other desired page after logout
+    // this.cdr.detectChanges();
   }
 
   isActive(link: string): boolean {

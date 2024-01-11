@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NewBlogComponent } from './femme/new-blog/new-blog.component';
 import { MyBlogComponent } from './femme/my-blog/my-blog.component';
+import { ProfilComponent } from './femme/profil/profil.component';
 
 
 
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AvatarDialogComponent,
         NewBlogComponent,
         MyBlogComponent,
+        ProfilComponent,
     ],
     imports: [
         CommonModule,

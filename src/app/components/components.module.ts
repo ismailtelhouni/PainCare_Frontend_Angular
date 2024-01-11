@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ContainerFormComponent } from './container-form/container-form.component';
 import { BlogCardSecondaireComponent } from './blog-card-secondaire/blog-card-secondaire.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 // AoT requires an exported function for factories
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ScoreComponent,
     FemmeActionsComponent,
     ContainerFormComponent,
-    BlogCardSecondaireComponent
+    BlogCardSecondaireComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ScoreComponent,
     FemmeActionsComponent,
     ContainerFormComponent,
-    BlogCardSecondaireComponent
+    BlogCardSecondaireComponent,
+    FooterComponent
   ]
 })
 export class ComponentsModule { }

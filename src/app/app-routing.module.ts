@@ -11,6 +11,7 @@ import { DiagnosticTestComponent } from './pages/femme/diagnostic-test/diagnosti
 import { NewFemmeComponent } from './pages/femme/new-femme/new-femme.component';
 import { NewBlogComponent } from './pages/femme/new-blog/new-blog.component';
 import { MyBlogComponent } from './pages/femme/my-blog/my-blog.component';
+import { ProfilComponent } from './pages/femme/profil/profil.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,9 @@ const routes: Routes = [
   },{
     path:"my-blog",
     component:MyBlogComponent
+  },{
+    path:"profil",
+    component:ProfilComponent
   }
 ];
 

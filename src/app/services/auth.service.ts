@@ -75,6 +75,7 @@ export class AuthService {
       } else {
         // If the stored session is invalid or incomplete, remove it
         this.removeSession();
+        this.isAuthenticatedValue=false;
       }
     }
     return this.isAuthenticatedValue;
@@ -160,5 +161,7 @@ export class AuthService {
   private removeSession(): void {
     localStorage.removeItem(this.sessionStorageKey);
     localStorage.removeItem(this.sessionStorageId);
+    localStorage.removeItem(this.sessionStorageFemmeId);
+    localStorage.removeItem(this.sessionStorageLogin);
   }
 }

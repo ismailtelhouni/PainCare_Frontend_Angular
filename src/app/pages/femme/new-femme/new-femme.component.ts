@@ -12,6 +12,7 @@ interface User {
   password: string,
   name: string;
   surname: string;
+  profil: string;
 }
 
 @Component({
@@ -95,11 +96,13 @@ export class NewFemmeComponent implements OnInit{
       password: value.password,
       name:value.name,
       surname:value.surname,
+      profil: this.avatarLink
     };
     
     // Send the user data to the backend
     this.userDataService.createUser(user).subscribe(
       (response) => {
+        console.log("userResponse: ",response);
         this.router.navigate(['/dashboard']);
       },
       (error) => {
