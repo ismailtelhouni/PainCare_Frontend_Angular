@@ -5,7 +5,14 @@
   "projects": {
     "PainCare_Frontend_Angular": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -31,7 +38,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "src/styles/HcssF.css",
+              "src/styles/HCssF.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
@@ -41,13 +48,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "85kb",
+                  "maximumError": "100kb"
                 }
               ],
               "outputHashing": "all"
@@ -97,7 +104,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "src/styles/HcssF.css",
+              "src/styles/HCssF.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []

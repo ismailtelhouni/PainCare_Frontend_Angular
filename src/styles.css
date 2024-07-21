@@ -15,7 +15,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: start !important;
+    align-items: flex-start !important;
     justify-content: space-between !important;
     width: 100vw;
     overflow-x: hidden;
