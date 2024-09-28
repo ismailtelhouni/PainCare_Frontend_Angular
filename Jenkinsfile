@@ -17,7 +17,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'docker run --rm -e SONAR_HOST_URL="http://localhost:9000" -e SONAR_LOGIN="sqa_3e11cb703e4961356c5798d55b5cf8d8cf59ac80" -v "$(pwd):/usr/src" sonarsource/sonar-scanner-cli'
+                    sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" --user="$(id -u):$(id -g)" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
                 }
             }
         }
