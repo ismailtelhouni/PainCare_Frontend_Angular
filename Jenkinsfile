@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        // Define the SonarScanner tool by its name as defined in Jenkins global tool configuration
+        sonarScanner 'SonarScanner' 
+    }
 
     stages {
         stage('Checkout') {
@@ -15,11 +19,10 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
             steps {
                 withSonarQubeEnv('SonaQube') {
                     // sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" --user="$(id -u):$(id -g)" -v "$PWD:/usr/src" -v "$PWD/.sonar/cache:/opt/sonar-scanner/.sonar/cache" sonarsource/sonar-scanner-cli'
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${sonarScanner}/bin/sonar-scanner"
                 }
             }
         }
