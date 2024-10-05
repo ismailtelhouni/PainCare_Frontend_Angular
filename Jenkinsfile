@@ -24,21 +24,16 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                // withSonarQubeEnv('SonaQube') {
-                //     sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" --user="$(id -u):$(id -g)" -v "$PWD:/usr/src" -v "$PWD/.sonar/cache:/opt/sonar-scanner/.sonar/cache" sonarsource/sonar-scanner-cli'
-                //     /*sh '''
-                //         npm run sonar-scanner \
-                //           -Dsonar.projectKey=pain-care-frontend-angular \
-                //           -Dsonar.sources=src \
-                //           -Dsonar.host.url=http://localhost:9000 \
-                //           -Dsonar.login=sqp_d25a9c53d58d371caac73054b2c435fd83281640
-                //         '''*/
-                // }
-                sh 'sonar-scanner \
+                withSonarQubeEnv('SonaQube') {
+                    sh '''
+                    export PATH=$PATH:~/Downloads/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner
+                    sonar-scanner \
                     -Dsonar.projectKey=pain-care-frontend-angular \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640'
+                    -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640
+                    '''
+                }
             }
         }
 
