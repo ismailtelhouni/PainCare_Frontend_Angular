@@ -23,10 +23,11 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
+            def scannerHome = tool 'SonarScanner';
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                    ~/Downloads/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner \
+                    ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=pain-care-frontend-angular \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://localhost:9000 \
