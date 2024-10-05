@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        sonarScanner 'SonarScanner'
-    }
 
 
     stages {
@@ -38,7 +35,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                    ${scannerHome}/bin/sonar-scanner \
+                    sonar-scanner \
                     -Dsonar.projectKey=pain-care-frontend-angular \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://localhost:9000 \
