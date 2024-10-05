@@ -17,7 +17,6 @@ pipeline {
         stage('Build Angular') {
             steps {
                 script {
-                    // Build the Angular project
                     sh 'npm run build --prod'
                 }
             }
