@@ -23,14 +23,6 @@ pipeline {
             }
         }
 
-        stage('Start Angular') {
-            steps {
-                script {
-                    sh 'ng s'
-                }
-            }
-        }
-
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
