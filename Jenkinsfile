@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                    export PATH=$PATH:~/Downloads/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner
+                    export PATH=$PATH:~/Downloads/sonar-scanner-6.2.1.4610-linux-x64/bin/
                     sonar-scanner \
                     -Dsonar.projectKey=pain-care-frontend-angular \
                     -Dsonar.sources=. \
