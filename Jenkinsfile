@@ -32,6 +32,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://localhost:9000 \
                     -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640
+                    echo 'SonarQube analysis is done!'
                     '''
                 }
             }
