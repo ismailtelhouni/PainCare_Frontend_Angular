@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        sonarScanner 'SonarScanner'
+    }
+
 
     stages {
         stage('Checkout') {
@@ -23,7 +27,6 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
