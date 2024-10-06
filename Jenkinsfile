@@ -25,7 +25,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                docker.image('sonarqube/sonar-scanner').inside {
+                docker.image('sonarsource/sonar-scanner-cli').inside {
                     sh '''
                     sonar-scanner \
                     -Dsonar.projectKey=pain-care-frontend-angular \
