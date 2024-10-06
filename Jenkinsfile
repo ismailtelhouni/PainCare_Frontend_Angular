@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/ismailtelhouni/PainCare_Frontend_Angular.git', branch: 'main'
+                git url: 'https://github.com/ismailtelhouni/PainCare_Frontend_Angular.git', branch: 'dev'
             }
         }
 
