@@ -26,12 +26,13 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    withDockerContainer(
-                    args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=pain-care-frontend-angular -Dsonar.logger=DEBUG" -v "$PWD:/usr/src"',
-                    image: 'sonarsource/sonar-scanner-cli'
-                ) {
-                    sh "echo 'SonarQube analysis is done!'"
-                }
+                    // withDockerContainer(
+                    //     args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=pain-care-frontend-angular -Dsonar.logger=DEBUG" -v "$PWD:/usr/src"',
+                    //     image: 'sonarsource/sonar-scanner-cli'
+                    // ) {
+                    //     sh "echo 'SonarQube analysis is done!'"
+                    // }
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
         }
