@@ -1,7 +1,5 @@
 pipeline {
     agent any
-    def qualityGateResult
-
 
     stages {
         stage('Checkout') {
