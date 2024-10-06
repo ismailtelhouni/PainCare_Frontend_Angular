@@ -26,12 +26,13 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    withDockerContainer(
-                        args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "${WORKSPACE}/pain-care-frontend-angular:/usr/src"',
-                        image: 'sonarsource/sonar-scanner-cli'
-                    ) {
-                        sh "echo 'SonarQube analysis is done!'"
-                    }
+                    // withDockerContainer(
+                    //     args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "${WORKSPACE}/pain-care-frontend-angular:/usr/src"',
+                    //     image: 'sonarsource/sonar-scanner-cli'
+                    // ) {
+                    //     sh "echo 'SonarQube analysis is done!'"
+                    // }
+                    sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
                 }
             }
         }
