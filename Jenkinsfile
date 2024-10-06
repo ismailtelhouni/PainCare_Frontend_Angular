@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     timeout(time: 1, unit: 'HOURS') {
-                        waitForQualityGate abortPipeline: true
+                        waitForQualityGate abortPipeline: true webhookSecretId: 'X-Sonar-Webhook-HMAC-SHA256'
                     }
                 }
             }
