@@ -25,6 +25,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
+                sh 'which sonar-scanner'
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                     sonar-scanner \
