@@ -27,7 +27,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     withDockerContainer(
-                        args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src"', 
+                        args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -e SONAR_ProSONAR_SCANNER_OPTS="-Dsonar.projectKey=pain-care-frontend-angular" -v "$PWD:/usr/src"', 
                         image: 'sonarsource/sonar-scanner-cli'
                     ) {
                         sh "echo 'SonarQube analysis is done!'"
