@@ -25,28 +25,12 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                docker.image('sonarsource/sonar-scanner-cli').inside {
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=pain-care-frontend-angular \
-                    -Dsonar.projectName=Pain Care Frontend Angular \
-                    -Dsonar.sources=. \
-                    -Dsonar.language=js \
-                    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640
-                    '''
+                withDockerContainer(
+                    args: '-Dsonar.projectKey=pain-care-frontend-angular -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640', 
+                    image: 'sonarsource/sonar-scanner-cli') 
+                {
+                    sh "echo 'SonarQube analysis is done!'"
                 }
-                // withSonarQubeEnv('SonarQube') {
-                //     sh '''
-                //     sonar-scanner \
-                //         -Dsonar.projectKey=pain-care-frontend-angular \
-                //         -Dsonar.sources=. \
-                //         -Dsonar.host.url=http://localhost:9000 \
-                //         -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640
-                //     echo 'SonarQube analysis is done!'
-                //     '''
-                // }
             }
         }
 
