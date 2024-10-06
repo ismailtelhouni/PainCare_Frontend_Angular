@@ -24,16 +24,34 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
+                script {
+                    def scannerHome = tool 'SonarScanner';
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=pain-care-frontend-angular \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=sqp_ebb1492d94255f87b2147b8ca71d4a0ba655c91a \
+                            -Dsonar.sources=src \
+                            -Dsonar.exclusions="**/node_modules/**"
+                        """
+                    }
                 }
             }
         }
 
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('SonarQube') {
+        //             sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
+        //         }
+        //     }
+        // }
+
         stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true , webhookSecretId: 'X-Sonar-Webhook-HMAC-SHA256', sonarqubeServerUrl: 'http://127.0.0.1:9000'
+                    waitForQualityGate abortPipeline: true , webhookSecretId: 'X-Sonar-Webhook-HMAC-SHA256'
                 }
             }
         }
