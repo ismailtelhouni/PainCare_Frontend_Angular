@@ -26,9 +26,10 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withDockerContainer(
-                    args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" --user="$(id -u):$(id -g)" -v "$PWD:/usr/src"', 
-                    image: 'sonarsource/sonar-scanner-cli') 
-                {
+                    args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src"', 
+                    image: 'sonarsource/sonar-scanner-cli',
+                    user: '0'  // Run as root user
+                ) {
                     sh "echo 'SonarQube analysis is done!'"
                 }
             }
