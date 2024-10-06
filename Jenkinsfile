@@ -25,7 +25,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarScanner') {
+                withSonarQubeEnv('SonarQube') {
                     sh '''
                     sonar-scanner \
                         -Dsonar.projectKey=pain-care-frontend-angular \
