@@ -25,7 +25,6 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                sh 'export PATH=$PATH:/home/ismailtelhouni/Downloads/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner:sonar-scanner'
                 sh 'which sonar-scanner'
                 withSonarQubeEnv('SonarScanner') {
                     sh '''
