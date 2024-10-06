@@ -26,7 +26,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withDockerContainer(
-                    args: '-Dsonar.projectKey=pain-care-frontend-angular -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_d25a9c53d58d371caac73054b2c435fd83281640', 
+                    args: '--network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" --user="$(id -u):$(id -g)" -v "$PWD:/usr/src", 
                     image: 'sonarsource/sonar-scanner-cli') 
                 {
                     sh "echo 'SonarQube analysis is done!'"
