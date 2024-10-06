@@ -32,10 +32,8 @@ pipeline {
 
         stage('Quality Gate') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    timeout(time: 1, unit: 'HOURS') {
-                        waitForQualityGate abortPipeline: true , webhookSecretId: 'X-Sonar-Webhook-HMAC-SHA256'
-                    }
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true , webhookSecretId: 'X-Sonar-Webhook-HMAC-SHA256'
                 }
             }
         }
