@@ -67,7 +67,7 @@ pipeline {
                     --auth-password "pnuw lgzu ofkv oyoq" \
                     --helo "localhost" \
                     --tls \
-                    --data "Subject: Sonar Subject Test\n\nSalam charaf from CLI"'
+                    --data "Subject: Sonar Subject Test\n\nSalam Ismail from CLI"'
             }
         }
     }
