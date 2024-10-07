@@ -55,5 +55,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Email Sent') {
+            steps{
+                sh 'swaks --to ismailtelhouni123@gmail.com \
+                    --from "chakra.hs.business@gmail.com" \
+                    --server "smtp.gmail.com" \
+                    --port "587" \
+                    --auth PLAIN \
+                    --auth-user "chakra.hs.business@gmail.com" \
+                    --auth-password "pnuw lgzu ofkv oyoq" \
+                    --helo "localhost" \
+                    --tls \
+                    --data "Subject: Sonar Subject Test\n\nSalam charaf from CLI"'
+            }
+        }
     }
 }
