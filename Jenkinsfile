@@ -78,22 +78,43 @@ pipeline {
     }
     post {
         always {
-            emailext (
-                subject: 'Sonar Subject Status',
-                body: '''
-                    <html>
-                        <body>
-                            <h2>Hi Ismail,</h2>
-                            <p>Here is the SonarQube analysis status for the project PainCare_Frontend_Angular:</p>
-                            <p>Quality Gate Status: ${currentBuild.currentResult}</p>
-                            <p>For more details, please visit the Jenkins URL: ${env.BUILD_URL}</p>
-                        </body>
-                    ''', 
-                to:"ismailtelhouni123@gmail.com",
-                from:"chakra.hs.business@gmail.com",
-                replyTo:"chakra.hs.business@gmail.com",
-                mimeType: 'text/html'
-            )
+            echo "Analyse terminée, vérifiez SonarQube pour les résultats."
+        }
+
+        failure {
+            script {
+                emailext(
+                    subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                    body: """<p>Bonjour,</p>
+                             <p>Le pipeline <strong>${env.JOB_NAME}</strong> a échoué à l'étape de Quality Gate lors de l'exécution de la build numéro <strong>${env.BUILD_NUMBER}</strong>.</p>
+                             <p>Statut de la Quality Gate: <strong>${currentBuild.result}</strong></p>
+                             <p>Vérifiez les détails de la build ici : <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                             <p>Cordialement,</p>
+                             <p>Votre serveur Jenkins</p>""",
+                    to: 'ismailtelhouni123@gmail.com', // Remplacez par les adresses souhaitées
+                    from:"chakra.hs.business@gmail.com",
+                    replyTo:"chakra.hs.business@gmail.com",
+                    mimeType: 'text/html'
+                )
+            }
+        }
+
+        success {
+            script {
+                emailext(
+                    subject: "Pipeline Succeeded: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                    body: """<p>Bonjour,</p>
+                             <p>Le pipeline <strong>${env.JOB_NAME}</strong> s'est terminé avec succès à l'étape de Quality Gate lors de l'exécution de la build numéro <strong>${env.BUILD_NUMBER}</strong>.</p>
+                             <p>Statut de la Quality Gate: <strong>${currentBuild.result}</strong></p>
+                             <p>Vérifiez les détails de la build ici : <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                             <p>Cordialement,</p>
+                             <p>Votre serveur Jenkins</p>""",
+                    to: 'ismailtelhouni123@gmail.com', // Remplacez par les adresses souhaitées
+                    from:"chakra.hs.business@gmail.com",
+                    replyTo:"chakra.hs.business@gmail.com",
+                    mimeType: 'text/html'
+                )
+            }
         }
     }
 }
