@@ -31,7 +31,7 @@ pipeline {
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=pain-care-frontend-angular \
                             -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.login=sqp_f262e85d9f1a0d89570963618291177d36483c6d \
+                            -Dsonar.login=sqa_75740e67a714826d0d8b99b0c23e0e84af6c3d01 \
                             -Dsonar.sources=src \
                             -Dsonar.exclusions="**/node_modules/**"
                         """
