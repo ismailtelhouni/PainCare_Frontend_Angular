@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    script{
-        def mvnHome = tool 'Maven';
-    }
 
     stages {
         stage('Checkout') {
