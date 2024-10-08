@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    script{
+        def mvnHome = tool 'Maven';
+    }
 
     stages {
         stage('Checkout') {
@@ -56,18 +59,42 @@ pipeline {
             }
         }
 
+        // stage('Email Sent') {
+        //     steps{
+        //         sh 'swaks --to ismailtelhouni123@gmail.com \
+        //             --from "chakra.hs.business@gmail.com" \
+        //             --server "smtp.gmail.com" \
+        //             --port "587" \
+        //             --auth PLAIN \
+        //             --auth-user "chakra.hs.business@gmail.com" \
+        //             --auth-password "pnuw lgzu ofkv oyoq" \
+        //             --helo "localhost" \
+        //             --tls \
+        //             --data "Subject: Sonar Subject Test\n\nSalam Ismail from CLI"'
+        //     }
+        // }
         stage('Email Sent') {
             steps{
-                sh 'swaks --to ismailtelhouni123@gmail.com \
-                    --from "chakra.hs.business@gmail.com" \
-                    --server "smtp.gmail.com" \
-                    --port "587" \
-                    --auth PLAIN \
-                    --auth-user "chakra.hs.business@gmail.com" \
-                    --auth-password "pnuw lgzu ofkv oyoq" \
-                    --helo "localhost" \
-                    --tls \
-                    --data "Subject: Sonar Subject Test\n\nSalam Ismail from CLI"'
+                post {
+                    always {
+                        emailext (
+                            subject: 'Sonar Subject Status',
+                            body: '''
+                                <html>
+                                    <body>
+                                        <h2>Hi Ismail,</h2>
+                                        <p>Here is the SonarQube analysis status for the project PainCare_Frontend_Angular:</p>
+                                        <p>Quality Gate Status: ${currentBuild.currentResult}</p>
+                                        <p>For more details, please visit the Jenkins URL: ${env.BUILD_URL}</p>
+                                    </body>
+                                ''', 
+                            to:"ismailtelhouni123@gmail.com",
+                            from:"chakra.hs.business@gmail.com",
+                            replyTo:"chakra.hs.business@gmail.com",
+                            mimeType: 'text/html'
+                        )
+                    }
+                }
             }
         }
     }
