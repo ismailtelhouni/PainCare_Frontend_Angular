@@ -30,8 +30,8 @@ pipeline {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=pain-care-frontend-angular \
-                            -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.login=sqp_ebb1492d94255f87b2147b8ca71d4a0ba655c91a \
+                            -Dsonar.host.url=https://c29f-154-144-237-193.ngrok-free.app \
+                            -Dsonar.login=sqa_1868c1341b4f3e169077c609a98f0637f11ee3b3 \
                             -Dsonar.sources=src \
                             -Dsonar.exclusions="**/node_modules/**"
                         """
