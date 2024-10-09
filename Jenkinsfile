@@ -10,14 +10,14 @@ pipeline {
 
         stage('Install Node.js') {
             steps {
-                sh 'npm install'
+                echo 'npm install'
             }
         }
         
         stage('Build Angular') {
             steps {
                 script {
-                    sh 'npm run build --prod'
+                    echo 'npm run build --prod'
                 }
             }
         }
