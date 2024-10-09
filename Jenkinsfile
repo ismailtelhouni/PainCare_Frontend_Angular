@@ -29,7 +29,7 @@ pipeline {
                     withSonarQubeEnv('SonarQube') {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=pain-care-frontend-angular \
+                            -Dsonar.projectKey=Angular_2 \
                             -Dsonar.host.url=https://c29f-154-144-237-193.ngrok-free.app \
                             -Dsonar.login=sqa_1868c1341b4f3e169077c609a98f0637f11ee3b3 \
                             -Dsonar.sources=src \
