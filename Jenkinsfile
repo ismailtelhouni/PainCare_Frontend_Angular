@@ -7,13 +7,11 @@ pipeline {
                 git url: 'https://github.com/ismailtelhouni/PainCare_Frontend_Angular.git', branch: 'main'
             }
         }
-
         stage('Install Node.js') {
             steps {
                 echo 'npm install'
             }
         }
-        
         stage('Build Angular') {
             steps {
                 script {
@@ -21,7 +19,6 @@ pipeline {
                 }
             }
         }
-
         stage('SonarQube Analysis') {
             steps {
                 script {
@@ -39,15 +36,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv('SonarQube') {
-        //             sh 'docker run --network=host -e SONAR_HOST_URL="http://127.0.0.1:9000" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
-        //         }
-        //     }
-        // }
-
         stage('Quality Gate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
@@ -55,26 +43,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Email Sent') {
-        //     steps{
-        //         sh 'swaks --to ismailtelhouni123@gmail.com \
-        //             --from "chakra.hs.business@gmail.com" \
-        //             --server "smtp.gmail.com" \
-        //             --port "587" \
-        //             --auth PLAIN \
-        //             --auth-user "chakra.hs.business@gmail.com" \
-        //             --auth-password "pnuw lgzu ofkv oyoq" \
-        //             --helo "localhost" \
-        //             --tls \
-        //             --data "Subject: Sonar Subject Test\n\nSalam Ismail from CLI"'
-        //     }
-        // }
-        // stage('Email Sent') {
-        //     steps{
-                
-        //     }
-        // }
     }
     post {
         always {
