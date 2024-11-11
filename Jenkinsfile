@@ -9,13 +9,19 @@ pipeline {
         }
         stage('Install Node.js') {
             steps {
-                sh 'npm install'
+                nodejs('NodeJs') {
+                    sh 'npm install'
+                }
+                // sh 'npm install'
             }
         }
         stage('Build Angular') {
             steps {
                 script {
-                    sh 'npm run build --prod'
+                    nodejs('NodeJs') {
+                        sh 'npm run build --prod'
+                    }
+                    
                 }
             }
         }
