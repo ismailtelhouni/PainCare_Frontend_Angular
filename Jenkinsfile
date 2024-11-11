@@ -9,13 +9,13 @@ pipeline {
         }
         stage('Install Node.js') {
             steps {
-                echo 'npm install'
+                sh 'npm install'
             }
         }
         stage('Build Angular') {
             steps {
                 script {
-                    echo 'npm run build --prod'
+                    sh 'npm run build --prod'
                 }
             }
         }
@@ -27,8 +27,8 @@ pipeline {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=Angular_2 \
-                            -Dsonar.host.url=https://c29f-154-144-237-193.ngrok-free.app \
-                            -Dsonar.login=sqa_1868c1341b4f3e169077c609a98f0637f11ee3b3 \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=sqp_7992fc47e7e98fc3277071f9941f43af0b9d0557 \
                             -Dsonar.sources=src \
                             -Dsonar.exclusions="**/node_modules/**"
                         """
